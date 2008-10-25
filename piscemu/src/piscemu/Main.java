@@ -1,5 +1,10 @@
 package piscemu;
 
+/*
+ * Esta classe deverá somente fazer o "bootstrap" do emulador
+ * Criando a janela principal e instanciando o control principal.
+ * Após isso o controle total da execução será passada a este control.
+ */
 public class Main {
 
     /**
