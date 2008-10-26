@@ -5,22 +5,24 @@ package piscemu.models;
  */
 public class Mux2_1 {
 
-    private BarramentoDados[] barramentoEntrada = new BarramentoDados[2];
+    private BarramentoDados[] barramentoEntrada;
     private BarramentoDados barramentoSaida;
-    private boolean sinalControle;
     
     
     public Mux2_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados saida){
+        barramentoEntrada = new BarramentoDados[2];
         barramentoEntrada[0] = entrada1;
         barramentoEntrada[1] = entrada2;
         barramentoSaida = saida;
     }
     
     public void setSinal(boolean sinal){
-        sinalControle = sinal;
+        if(sinal == false){
+            barramentoSaida.setDados(barramentoEntrada[0]);
+        }else{
+            barramentoSaida.setDados(barramentoEntrada[1]);
+        }
     }
     
-    public void clock(){
-        
-    }
+    
 }

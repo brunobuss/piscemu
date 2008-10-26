@@ -5,14 +5,15 @@ package piscemu.models;
  */
 public class Mux8_1 {
 
-    private BarramentoDados[] barramentoEntrada = new BarramentoDados[8];
+    private BarramentoDados[] barramentoEntrada;
     private BarramentoDados barramentoSaida;
-    private boolean sinalControle;
-    
+        
     
     public Mux8_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados entrada3
                     , BarramentoDados entrada4, BarramentoDados entrada5, BarramentoDados entrada6
                     , BarramentoDados entrada7, BarramentoDados entrada8, BarramentoDados saida){
+        
+        barramentoEntrada = new BarramentoDados[8];
         barramentoEntrada[0] = entrada1;
         barramentoEntrada[1] = entrada2;
         barramentoEntrada[2] = entrada3;
@@ -24,11 +25,24 @@ public class Mux8_1 {
         barramentoSaida = saida;
     }
     
-    public void setSinal(boolean sinal){
-        sinalControle = sinal;
-    }
-    
-    public void clock(){
+    public void setSinal(boolean sinal1, boolean sinal2, boolean sinal3){
+        if(sinal1 == false && sinal2 == false && sinal3 == false)
+            barramentoSaida.setDados(barramentoEntrada[0]);
+        else if(sinal1 == false && sinal2 == false && sinal3 == true)
+            barramentoSaida.setDados(barramentoEntrada[1]);
+        else if(sinal1 == false && sinal2 == true && sinal3 == false)
+            barramentoSaida.setDados(barramentoEntrada[2]);
+        else if(sinal1 == false && sinal2 == true && sinal3 == true)
+            barramentoSaida.setDados(barramentoEntrada[3]);
+        else if(sinal1 == true && sinal2 == false && sinal3 == false)
+            barramentoSaida.setDados(barramentoEntrada[4]);
+        else if(sinal1 == true && sinal2 == false && sinal3 == true)
+            barramentoSaida.setDados(barramentoEntrada[5]);
+        else if(sinal1 == true && sinal2 == true && sinal3 == false)
+            barramentoSaida.setDados(barramentoEntrada[6]);
+        else if(sinal1 == true && sinal2 == true && sinal3 == true)
+            barramentoSaida.setDados(barramentoEntrada[7]);
+        
         
     }
 }

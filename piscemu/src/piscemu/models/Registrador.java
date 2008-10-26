@@ -7,8 +7,7 @@ public class Registrador {
 
     private BarramentoDados barramentoEntrada;
     private BarramentoDados barramentoSaida;
-    private boolean sinalControle;
-    
+        
     
     public Registrador(BarramentoDados entrada, BarramentoDados saida){
         barramentoEntrada = entrada;
@@ -16,11 +15,10 @@ public class Registrador {
     }
     
     public void setSinal(boolean sinal){
-        sinalControle = sinal;
+        if(sinal == true){
+            barramentoSaida.setDados(barramentoEntrada);
+        }
     }
     
-    public void clock(){
-        
-    }
     
 }
