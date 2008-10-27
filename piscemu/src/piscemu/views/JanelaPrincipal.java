@@ -52,16 +52,31 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         itemCarregar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         itemCarregar.setMnemonic('a');
         itemCarregar.setText("Carregar arquivo");
+        itemCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCarregarActionPerformed(evt);
+            }
+        });
         menuConfigurar.add(itemCarregar);
 
         itemReiniciar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         itemReiniciar.setMnemonic('r');
         itemReiniciar.setText("Reiniciar");
+        itemReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemReiniciarActionPerformed(evt);
+            }
+        });
         menuConfigurar.add(itemReiniciar);
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         itemSair.setMnemonic('s');
         itemSair.setText("Sair");
+        itemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSairActionPerformed(evt);
+            }
+        });
         menuConfigurar.add(itemSair);
 
         menuPrincipal.add(menuConfigurar);
@@ -72,16 +87,31 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         itemMicroinstrucao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         itemMicroinstrucao.setMnemonic('m');
         itemMicroinstrucao.setText("Próxima microinstrução");
+        itemMicroinstrucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMicroinstrucaoActionPerformed(evt);
+            }
+        });
         menuExecutar.add(itemMicroinstrucao);
 
         itemInstrucao.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         itemInstrucao.setMnemonic('i');
         itemInstrucao.setText("Próxima instrução");
+        itemInstrucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemInstrucaoActionPerformed(evt);
+            }
+        });
         menuExecutar.add(itemInstrucao);
 
         itemTodas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         itemTodas.setMnemonic('t');
         itemTodas.setText("Todas instruções");
+        itemTodas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTodasActionPerformed(evt);
+            }
+        });
         menuExecutar.add(itemTodas);
 
         menuPrincipal.add(menuExecutar);
@@ -92,11 +122,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         itemTutorial.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         itemTutorial.setMnemonic('u');
         itemTutorial.setText("Tutorial");
+        itemTutorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTutorialActionPerformed(evt);
+            }
+        });
         menuAjuda.add(itemTutorial);
 
         itemSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         itemSobre.setMnemonic('b');
         itemSobre.setText("Sobre");
+        itemSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSobreActionPerformed(evt);
+            }
+        });
         menuAjuda.add(itemSobre);
 
         menuPrincipal.add(menuAjuda);
@@ -116,6 +156,39 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void itemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSairActionPerformed
+// TODO add your handling code here:
+    System.exit(0);
+}//GEN-LAST:event_itemSairActionPerformed
+
+private void itemCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCarregarActionPerformed
+    System.out.println("Carregar arquivo...");
+}//GEN-LAST:event_itemCarregarActionPerformed
+
+private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReiniciarActionPerformed
+    System.out.println("Reiniciar...");
+}//GEN-LAST:event_itemReiniciarActionPerformed
+
+private void itemMicroinstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMicroinstrucaoActionPerformed
+    System.out.println("Próxima microinstrução...");
+}//GEN-LAST:event_itemMicroinstrucaoActionPerformed
+
+private void itemInstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInstrucaoActionPerformed
+    System.out.println("Próxima instrução...");
+}//GEN-LAST:event_itemInstrucaoActionPerformed
+
+private void itemTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTodasActionPerformed
+    System.out.println("Executar todas as instruções...");
+}//GEN-LAST:event_itemTodasActionPerformed
+
+private void itemTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTutorialActionPerformed
+    System.out.println("Exibir tutorial...");
+}//GEN-LAST:event_itemTutorialActionPerformed
+
+private void itemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSobreActionPerformed
+    System.out.println("Exibir sobre...");
+}//GEN-LAST:event_itemSobreActionPerformed
 
     /**
     * @param args the command line arguments
