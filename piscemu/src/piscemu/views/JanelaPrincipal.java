@@ -6,6 +6,8 @@
 
 package piscemu.views;
 
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author  davivercillo
@@ -163,7 +165,9 @@ private void itemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_itemSairActionPerformed
 
 private void itemCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCarregarActionPerformed
-    System.out.println("Carregar arquivo...");
+    JFileChooser dialogArquivo = new JFileChooser("Carregar arquivo fonte.");
+    dialogArquivo.showDialog(this, "Abrir");
+    System.out.println("Arquivo selecionado: " + dialogArquivo.getSelectedFile().toString());
 }//GEN-LAST:event_itemCarregarActionPerformed
 
 private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReiniciarActionPerformed
