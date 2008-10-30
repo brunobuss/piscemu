@@ -27,21 +27,21 @@ public class Mux8_1 {
     
     public void setSinal(boolean sinal1, boolean sinal2, boolean sinal3){
         if(sinal1 == false && sinal2 == false && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[0]);
+            barramentoSaida.setDados(barramentoEntrada[0].getDados());
         else if(sinal1 == false && sinal2 == false && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[1]);
+            barramentoSaida.setDados(barramentoEntrada[1].getDados());
         else if(sinal1 == false && sinal2 == true && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[2]);
+            barramentoSaida.setDados(barramentoEntrada[2].getDados());
         else if(sinal1 == false && sinal2 == true && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[3]);
+            barramentoSaida.setDados(barramentoEntrada[3].getDados());
         else if(sinal1 == true && sinal2 == false && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[4]);
+            barramentoSaida.setDados(barramentoEntrada[4].getDados());
         else if(sinal1 == true && sinal2 == false && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[5]);
+            barramentoSaida.setDados(barramentoEntrada[5].getDados());
         else if(sinal1 == true && sinal2 == true && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[6]);
+            barramentoSaida.setDados(barramentoEntrada[6].getDados());
         else if(sinal1 == true && sinal2 == true && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[7]);
+            barramentoSaida.setDados(barramentoEntrada[7].getDados());
         
         
     }
