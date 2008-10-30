@@ -4,13 +4,14 @@ package piscemu.models;
  * Multiplex de 2 entradas
  */
 public class Mux2_1 {
-
+    
+    private static final short QTDEntradas = 2;  
     private BarramentoDados[] barramentoEntrada;
     private BarramentoDados barramentoSaida;
     
     
     public Mux2_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados saida){
-        barramentoEntrada = new BarramentoDados[2];
+        barramentoEntrada = new BarramentoDados[QTDEntradas];
         barramentoEntrada[0] = entrada1;
         barramentoEntrada[1] = entrada2;
         barramentoSaida = saida;
