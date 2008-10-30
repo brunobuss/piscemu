@@ -17,6 +17,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="97"/>
                 <Property name="text" type="java.lang.String" value="Carregar arquivo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para carregar o arquivo com as instru&#xe7;&#xf5;es a serem simuladas."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemCarregarActionPerformed"/>
@@ -29,6 +30,8 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="114"/>
                 <Property name="text" type="java.lang.String" value="Reiniciar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para reinicia o simulador."/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemReiniciarActionPerformed"/>
@@ -41,6 +44,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Sair"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para sair."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSairActionPerformed"/>
@@ -61,6 +65,8 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Pr&#xf3;xima microinstru&#xe7;&#xe3;o"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para executar a pr&#xf3;xima microinstru&#xe7;&#xe3;o."/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMicroinstrucaoActionPerformed"/>
@@ -73,6 +79,8 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="105"/>
                 <Property name="text" type="java.lang.String" value="Pr&#xf3;xima instru&#xe7;&#xe3;o"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para executar a pr&#xf3;xima instru&#xe7;&#xe3;o."/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemInstrucaoActionPerformed"/>
@@ -85,6 +93,8 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="116"/>
                 <Property name="text" type="java.lang.String" value="Todas instru&#xe7;&#xf5;es"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para executar todas as instru&#xe7;&#xf5;es."/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemTodasActionPerformed"/>
@@ -105,6 +115,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="117"/>
                 <Property name="text" type="java.lang.String" value="Tutorial"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para exibir as dicas sobre o uso do simulador."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemTutorialActionPerformed"/>
@@ -117,6 +128,7 @@
                 </Property>
                 <Property name="mnemonic" type="int" value="98"/>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
+                <Property name="toolTipText" type="java.lang.String" value="Clique para exibir informa&#xe7;&#xf5;es sobre o simulador e seus autores."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSobreActionPerformed"/>
