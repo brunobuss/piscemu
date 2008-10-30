@@ -1,16 +1,32 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ *  any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package piscemu.views;
 
 import java.io.File;
 import javax.swing.JFileChooser;
 
-/**
- *
- * @author  davivercillo
- */
 public class JanelaPrincipal extends javax.swing.JFrame {
 
     public JanelaPrincipal() {
         initComponents();
+        this.janelaSobre = new JanelaSobre();
+        this.janelaTutorial = new JanelaTutorial();
+        
+        // Posicionar a janela no centro.
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +48,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Practical Instruction Set Computer Simulator (PISCSim)");
-        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("janelaPrincipal"); // NOI18N
         setResizable(false);
@@ -198,10 +213,12 @@ private void itemTodasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void itemTutorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTutorialActionPerformed
     System.out.println("Exibir tutorial...");
+    this.janelaTutorial.setVisible(true);
 }//GEN-LAST:event_itemTutorialActionPerformed
 
 private void itemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSobreActionPerformed
     System.out.println("Exibir sobre...");
+    this.janelaSobre.setVisible(true);
 }//GEN-LAST:event_itemSobreActionPerformed
 
 private void setFuncionando(boolean state) {
@@ -233,4 +250,6 @@ private void setFuncionando(boolean state) {
     private javax.swing.JMenu menuExecutar;
     private javax.swing.JMenuBar menuPrincipal;
     // End of variables declaration//GEN-END:variables
+    private JanelaSobre janelaSobre;
+    private JanelaTutorial janelaTutorial;
 }
