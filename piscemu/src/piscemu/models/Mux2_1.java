@@ -18,9 +18,9 @@ public class Mux2_1 {
     
     public void setSinal(boolean sinal){
         if(sinal == false){
-            barramentoSaida.setDados(barramentoEntrada[0]);
+            barramentoSaida.setDados(barramentoEntrada[0].getDados());
         }else{
-            barramentoSaida.setDados(barramentoEntrada[1]);
+            barramentoSaida.setDados(barramentoEntrada[1].getDados());
         }
     }
     

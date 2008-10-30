@@ -16,7 +16,7 @@ public class Registrador {
     
     public void setSinal(boolean sinal){
         if(sinal == true){
-            barramentoSaida.setDados(barramentoEntrada);
+            barramentoSaida.setDados(barramentoEntrada.getDados());
         }
     }
     
