@@ -28,7 +28,7 @@ public class ControladorMemoria {
         
         //Cria todas as instancias de TDados do vetor de memória.
         for(int i = 0; i < tamMemoria; i++){
-            memoria[i] = new TDados(0);
+            memoria[i].setDado(0);
         }
     }
     
@@ -47,7 +47,7 @@ public class ControladorMemoria {
         }
         else{ //Escrita
             dado = new TDados(barramentoEntradaDados.getDados());
-            memoria[barramentoEntradaEndereco.getDados().getDado()] = dado;
+            memoria[barramentoEntradaEndereco.getDados().getDado()].setDado(dado);
         }
     }
     
