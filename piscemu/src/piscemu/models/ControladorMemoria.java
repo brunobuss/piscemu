@@ -7,7 +7,7 @@ package piscemu.models;
 
 public class ControladorMemoria {
 
-    private final int tamMemoria = 128 * 1024; //128K
+    private final int tamMemoria = 64 * 1024; //64K posicoes
     
     private BarramentoDados barramentoEntradaEndereco;
     private BarramentoDados barramentoSaidaDados;
