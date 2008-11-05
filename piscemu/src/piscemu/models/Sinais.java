@@ -10,7 +10,7 @@ package piscemu.models;
  * @author thiago
  */
 public class Sinais {
-    
+    public static final int QTDSINAIS = 22;
     public static final int SINAL_A = 0;
     public static final int SINAL_B = 1;
     public static final int SINAL_C = 2;
@@ -34,4 +34,28 @@ public class Sinais {
     public static final int SINAL_V = 20;
     public static final int SINAL_X = 21;
 //    public static final int SINAL_Z = 22;
+    
+    public static final int SINAL_R0 = 0;
+    public static final int SINAL_R1 = 0;
+    public static final int SINAL_R2 = 0;
+    public static final int SINAL_R3 = 0;
+    public static final int SINAL_R4 = 0;
+    public static final int SINAL_RX = 0;
+    public static final int SINAL_PC = 0;
+    public static final int SINAL_RD = 0;
+    public static final int SINAL_RE = 0;
+    public static final int SINAL_IR = 0;
+    public static final int SINAL_MUX = 0;
+    public static final int SINAL_MUXA1 = 0;
+    public static final int SINAL_MUXA2 = 0;
+    public static final int SINAL_MUXA3 = 0;
+    public static final int SINAL_MUXB1 = 0;
+    public static final int SINAL_MUXB2 = 0;
+    public static final int SINAL_MUXB3 = 0;
+    public static final int SINAL_ULA1 = 0;
+    public static final int SINAL_ULA2 = 0;
+    public static final int SINAL_ULA3 = 0;
+    public static final int SINAL_ULA4 = 0;
+    public static final int SINAL_MEM = 0;
+
 }
