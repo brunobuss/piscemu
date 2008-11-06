@@ -3,16 +3,18 @@ package piscemu.models;
 /**
  * Multiplex de 8 entradas
  */
-public class Mux8_1 {
+public class Mux8_1 implements ClockListener{
     private final short QTDEntradas = 8; 
 
     private BarramentoDados[] barramentoEntrada;
     private BarramentoDados barramentoSaida;
-        
+    private BarramentoSinais barramentoSinais;
+    private int maskSinal;
     
-    public Mux8_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados entrada3
-                    , BarramentoDados entrada4, BarramentoDados entrada5, BarramentoDados entrada6
-                    , BarramentoDados entrada7, BarramentoDados entrada8, BarramentoDados saida){
+    public Mux8_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados entrada3,
+                  BarramentoDados entrada4, BarramentoDados entrada5, BarramentoDados entrada6,
+                  BarramentoDados entrada7, BarramentoDados entrada8, BarramentoDados saida,
+                  int maskSinal, BarramentoSinais barramentoSinais){
         
         barramentoEntrada = new BarramentoDados[QTDEntradas];
         barramentoEntrada[0] = entrada1;
@@ -24,6 +26,8 @@ public class Mux8_1 {
         barramentoEntrada[6] = entrada7;
         barramentoEntrada[7] = entrada8;
         barramentoSaida = saida;
+        this.barramentoSinais = barramentoSinais;
+        this.maskSinal = maskSinal;
     }
     
     public void setSinal(boolean sinal1, boolean sinal2, boolean sinal3){
@@ -46,4 +50,17 @@ public class Mux8_1 {
         
         
     }
+    
+    public TDados getDado(){
+        return barramentoSaida.getDados();
+    }
+
+    public void clock() {
+        
+    }
+
+    public void masterSync() {}
+        
+    
+    
 }

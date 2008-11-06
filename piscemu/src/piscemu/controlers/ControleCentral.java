@@ -4,19 +4,22 @@
  */
 
 package piscemu.controlers;
+import piscemu.models.TDados;
 import piscemu.models.BarramentoDados;
+import piscemu.models.BarramentoSinais;
 import piscemu.models.Registrador;
 import piscemu.models.Mux2_1;
 import piscemu.models.Mux8_1;
 import piscemu.models.UC;
 import piscemu.models.ULA;
 import piscemu.models.ControladorMemoria;
-import piscemu.models.ClockListener;
+import piscemu.models.Sinais;
 /**
  *
  * @author thiago
  */
-public class ControleCentral implements ClockListener{
+public class ControleCentral{
+        BarramentoSinais barrSin;
         BarramentoDados barrULA;
         BarramentoDados barrR0;
         BarramentoDados barrR1;
@@ -65,40 +68,81 @@ public class ControleCentral implements ClockListener{
         barrMUXA = new BarramentoDados();
         barrMUXB = new BarramentoDados();
         barrMEM = new BarramentoDados();
-        r0 = new Registrador(barrULA, barrR0);
-        r1 = new Registrador(barrULA, barrR1);
-        r2 = new Registrador(barrULA, barrR2);
-        r3 = new Registrador(barrULA, barrR3);
-        r4 = new Registrador(barrULA, barrR4);
-        rx = new Registrador(barrULA, barrRX);
-        pc = new Registrador(barrULA, barrPC);
-        rd = new Registrador(barrULA, barrRD);
-        re = new Registrador(barrULA, barrRE);
-        ir = new Registrador(barrULA, barrIR);
-        mux = new Mux2_1(barrMEM, barrULA, barrMUX);
-        muxA = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXA);
-        muxB = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXB);
-        uc = new UC(barrIR);
-        ula = new ULA(barrULA, barrMUXA, barrMUXB);
-        memoria = new ControladorMemoria(barrRE, barrMEM, barrRD);
-    }
-
-    public void t1() {
-        
-    }
-
-    public void t2() {
-        
-    }
-
-    public void t3() {
-        
+        r0 = new Registrador(barrULA, barrR0, Sinais.SINAL_R0, barrSin);
+        r1 = new Registrador(barrULA, barrR1, Sinais.SINAL_R1, barrSin);
+        r2 = new Registrador(barrULA, barrR2, Sinais.SINAL_R2, barrSin);
+        r3 = new Registrador(barrULA, barrR3, Sinais.SINAL_R3, barrSin);
+        r4 = new Registrador(barrULA, barrR4, Sinais.SINAL_R4, barrSin);
+        rx = new Registrador(barrULA, barrRX, Sinais.SINAL_RX, barrSin);
+        pc = new Registrador(barrULA, barrPC, Sinais.SINAL_PC, barrSin);
+        rd = new Registrador(barrULA, barrRD, Sinais.SINAL_RD, barrSin);
+        re = new Registrador(barrULA, barrRE, Sinais.SINAL_RE, barrSin);
+        ir = new Registrador(barrULA, barrIR, Sinais.SINAL_IR, barrSin);
+        mux = new Mux2_1(barrMEM, barrULA, barrMUX, Sinais.SINAL_MUX, barrSin);
+        muxA = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXA, Sinais.SINAL_MUXA, barrSin);
+        muxB = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXB, Sinais.SINAL_MUXB, barrSin);
+        uc = new UC(barrIR, barrSin);
+        ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA);
+        memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
     }
     
+    public TDados getR0(){
+        return r0.getDado();
+    }
     
+    public TDados getR1(){
+        return r1.getDado();
+    }
     
+    public TDados getR2(){
+        return r2.getDado();
+    }
     
-        
-        
-        
+    public TDados getR3(){
+        return r3.getDado();
+    }
+    
+    public TDados getR4(){
+        return r4.getDado();
+    }
+    
+    public TDados getRX(){
+        return rx.getDado();
+    }
+    
+    public TDados getPC(){
+        return pc.getDado();
+    }
+    
+    public TDados getRD(){
+        return rd.getDado();
+    }
+    
+    public TDados getRE(){
+        return re.getDado();
+    }
+    
+    public TDados getIR(){
+        return ir.getDado();
+    }
+    
+    public TDados getMUX(){
+        return mux.getDado();
+    }
+    
+    public TDados getMUXA(){
+        return muxA.getDado();
+    }
+    
+    public TDados getMUXB(){
+        return muxB.getDado();
+    }
+    
+    public TDados getULA(){
+        return ula.getDado();
+    }
+    
+    public TDados getMEM(){
+        return memoria.getDado();
+    }
 }

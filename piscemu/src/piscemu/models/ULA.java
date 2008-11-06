@@ -9,21 +9,26 @@ package piscemu.models;
  *
  * @author thiago
  */
-public class ULA {
+public class ULA implements ClockListener{
     public static final short QTDSinais = 4;
     public static final short QTDFlags = 5;
     
     private BarramentoDados barramentoSaida;
     private BarramentoDados barramentoEntradaA;
     private BarramentoDados barramentoEntradaB;
+    private BarramentoSinais barramentoSinais;
+    private int maskSinais;
     
     public ULA(BarramentoDados barramentoSaida, 
                BarramentoDados barramentoEntradaA,
-               BarramentoDados barramentoEntradaB){
+               BarramentoDados barramentoEntradaB,
+               BarramentoSinais barramentoSinais, int maskSinais){
         
         this.barramentoEntradaA = barramentoEntradaA;
         this.barramentoEntradaB = barramentoEntradaB;
         this.barramentoSaida = barramentoSaida;
+        this.barramentoSinais = barramentoSinais;
+        this.maskSinais = maskSinais;
     }
     
     public void setSinal(boolean[] sinais){
@@ -102,5 +107,17 @@ public class ULA {
         
         return ret;
     }
+
+    public void clock() {
+        
+    }
+    
+    public TDados getDado(){
+        return barramentoSaida.getDados();
+    }
+
+    public void masterSync() {}
+    
+    
 
 }

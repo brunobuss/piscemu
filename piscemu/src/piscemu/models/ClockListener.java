@@ -10,7 +10,6 @@ package piscemu.models;
  * @author thiago
  */
 public interface ClockListener {
-    public void t1();
-    public void t2();
-    public void t3();
+    public void clock();
+    public void masterSync();
 }

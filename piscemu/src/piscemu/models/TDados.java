@@ -12,10 +12,10 @@ public class TDados {
     }
     
     public TDados(TDados dado){
-        this.dado = dado.getDado();
+        this.dado = dado.getValor();
     }
     
-    public short getDado(){
+    public short getValor(){
         return dado;
     }
     
@@ -24,32 +24,32 @@ public class TDados {
     }
     
     public void setDado(TDados dado){
-        this.dado = dado.getDado();
+        this.dado = dado.getValor();
     }
     
     public TDados soma(TDados dado){
-        return new TDados((short)(this.dado+dado.getDado()));
+        return new TDados((short)(this.dado+dado.getValor()));
     }
     
     public TDados subtrai(TDados dado){
-        return new TDados((short)(dado.getDado() - this.dado));
+        return new TDados((short)(dado.getValor() - this.dado));
     }
     
     public TDados compara(TDados dado){
-        if(this.dado > dado.getDado())
+        if(this.dado > dado.getValor())
             return new TDados(1);
-        else if(this.dado < dado.getDado())
+        else if(this.dado < dado.getValor())
             return new TDados(-1);
         else
             return new TDados(0);
     }
     
     public TDados and(TDados dado){
-        return new TDados((short)(this.dado & dado.getDado()));
+        return new TDados((short)(this.dado & dado.getValor()));
     }
     
     public TDados or(TDados dado){
-        return new TDados((short)(this.dado | dado.getDado()));
+        return new TDados((short)(this.dado | dado.getValor()));
     }
     
     public TDados not(){
@@ -66,10 +66,10 @@ public class TDados {
     }
     
     public TDados shiftR(TDados dado){
-        return new TDados(this.dado>>dado.getDado());
+        return new TDados(this.dado>>dado.getValor());
     }
     
     public TDados shiftL(TDados dado){
-        return new TDados(this.dado<<dado.getDado());
+        return new TDados(this.dado<<dado.getValor());
     }    
 }
