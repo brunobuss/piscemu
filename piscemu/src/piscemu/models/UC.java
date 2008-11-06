@@ -16,6 +16,7 @@ public class UC {
     private ArrayList<ClockListener> t1;
     private ArrayList<ClockListener> t2;
     private ArrayList<ClockListener> t3;
+    private ArrayList<ClockListener> ms;
     private BarramentoDados barramentoEntrada;
     private BarramentoSinais barramentoSinais;
     
@@ -25,6 +26,7 @@ public class UC {
         t1 = new ArrayList<ClockListener>();
         t2 = new ArrayList<ClockListener>();
         t3 = new ArrayList<ClockListener>();
+        ms = new ArrayList<ClockListener>();
     }
     
     public void setSinaisControle(){
@@ -47,6 +49,10 @@ public class UC {
         t3.add(listener);
     }
     
+    public void addListenerMS(ClockListener listener){
+        ms.add(listener);
+    }
+    
     private void eventoT1(){
         for (int i = 0; i < t1.size(); i++) {
             t1.get(i).clock();
@@ -64,6 +70,13 @@ public class UC {
     private void eventoT3(){
         for (int i = 0; i < t3.size(); i++) {
             t3.get(i).clock();
+            
+        }
+    }
+    
+    private void eventoMS(){
+        for (int i = 0; i < ms.size(); i++) {
+            ms.get(i).clock();
             
         }
     }

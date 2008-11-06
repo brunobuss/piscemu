@@ -84,6 +84,26 @@ public class ControleCentral{
         uc = new UC(barrIR, barrSin);
         ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA);
         memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
+        
+        uc.addListenerT1(rd);
+        uc.addListenerT1(muxA);
+        uc.addListenerT1(muxB);
+        
+        uc.addListenerT2(ula);
+        
+        uc.addListenerT3(re);
+        uc.addListenerT3(ir);
+        uc.addListenerT3(mux);
+        uc.addListenerT3(rd);
+        uc.addListenerT3(r0);
+        uc.addListenerT3(r1);
+        uc.addListenerT3(r2);
+        uc.addListenerT3(r3);
+        uc.addListenerT3(r4);
+        uc.addListenerT3(rx);
+        uc.addListenerT3(pc);
+        uc.addListenerT3(memoria);
+        uc.addListenerMS(memoria);
     }
     
     public TDados getR0(){
