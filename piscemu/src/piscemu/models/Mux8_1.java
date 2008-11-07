@@ -43,17 +43,13 @@ public class Mux8_1 implements ClockListener{
         deslocamento = i;
     }
     
-    public void setSinal(boolean sinal1, boolean sinal2, boolean sinal3){
+    public void clock() {
         int valor = (barramentoSinais.getSinais() & maskSinal) >> deslocamento;
         barramentoSaida.setDados(barramentoEntrada[valor].getDados());    
-    }
-    
+    }    
+
     public TDados getDado(){
         return barramentoSaida.getDados();
-    }
-
-    public void clock() {
-        
     }
 
     public void masterSync() {}
