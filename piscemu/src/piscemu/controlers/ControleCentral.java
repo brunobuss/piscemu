@@ -78,7 +78,7 @@ public class ControleCentral{
         r4 = new Registrador(barrULA, barrR4, Sinais.SINAL_R4, barrSin);
         rx = new Registrador(barrULA, barrRX, Sinais.SINAL_RX, barrSin);
         pc = new Registrador(barrULA, barrPC, Sinais.SINAL_PC, barrSin);
-        rd = new Registrador(barrULA, barrRD, Sinais.SINAL_RD, barrSin);
+        rd = new Registrador(barrMUX, barrRD, Sinais.SINAL_RD, barrSin);
         re = new Registrador(barrULA, barrRE, Sinais.SINAL_RE, barrSin);
         ir = new Registrador(barrULA, barrIR, Sinais.SINAL_IR, barrSin);
         mux = new Mux2_1(barrMEM, barrULA, barrMUX, Sinais.SINAL_MUX, barrSin);
@@ -88,15 +88,14 @@ public class ControleCentral{
         ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA, flags);
         memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
         
-        uc.addListenerT1(rd);
         uc.addListenerT1(muxA);
         uc.addListenerT1(muxB);
+        uc.addListenerT1(mux);
         
         uc.addListenerT2(ula);
         
         uc.addListenerT3(re);
         uc.addListenerT3(ir);
-        uc.addListenerT3(mux);
         uc.addListenerT3(rd);
         uc.addListenerT3(r0);
         uc.addListenerT3(r1);
@@ -105,7 +104,7 @@ public class ControleCentral{
         uc.addListenerT3(r4);
         uc.addListenerT3(rx);
         uc.addListenerT3(pc);
-        uc.addListenerT3(memoria);
+
         uc.addListenerMS(memoria);
     }
     
