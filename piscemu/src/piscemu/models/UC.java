@@ -19,10 +19,13 @@ public class UC {
     private ArrayList<ClockListener> ms;
     private BarramentoDados barramentoEntrada;
     private BarramentoSinais barramentoSinais;
+    private BarramentoFlags barramentoFlags;
     
-    public UC(BarramentoDados barramentoEntrada, BarramentoSinais barramentoSinais){
+    public UC(BarramentoDados barramentoEntrada, BarramentoSinais barramentoSinais,
+              BarramentoFlags barramentoFlags){
         this.barramentoEntrada = barramentoEntrada;
         this.barramentoSinais = barramentoSinais;
+        this.barramentoFlags = barramentoFlags;
         t1 = new ArrayList<ClockListener>();
         t2 = new ArrayList<ClockListener>();
         t3 = new ArrayList<ClockListener>();

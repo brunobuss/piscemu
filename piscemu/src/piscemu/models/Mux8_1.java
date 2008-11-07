@@ -10,6 +10,7 @@ public class Mux8_1 implements ClockListener{
     private BarramentoDados barramentoSaida;
     private BarramentoSinais barramentoSinais;
     private int maskSinal;
+    private int deslocamento;
     
     public Mux8_1(BarramentoDados entrada1, BarramentoDados entrada2, BarramentoDados entrada3,
                   BarramentoDados entrada4, BarramentoDados entrada5, BarramentoDados entrada6,
@@ -28,27 +29,23 @@ public class Mux8_1 implements ClockListener{
         barramentoSaida = saida;
         this.barramentoSinais = barramentoSinais;
         this.maskSinal = maskSinal;
+        calculaDeslocamento();
+    }
+    
+    private void calculaDeslocamento(){
+        int temp = maskSinal;
+        int i;
+        for(i = 0; i < 32; i++){
+            if(temp%2 == 1)
+                break;
+            temp = temp >> 1;
+        }
+        deslocamento = i;
     }
     
     public void setSinal(boolean sinal1, boolean sinal2, boolean sinal3){
-        if(sinal1 == false && sinal2 == false && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[0].getDados());
-        else if(sinal1 == false && sinal2 == false && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[1].getDados());
-        else if(sinal1 == false && sinal2 == true && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[2].getDados());
-        else if(sinal1 == false && sinal2 == true && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[3].getDados());
-        else if(sinal1 == true && sinal2 == false && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[4].getDados());
-        else if(sinal1 == true && sinal2 == false && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[5].getDados());
-        else if(sinal1 == true && sinal2 == true && sinal3 == false)
-            barramentoSaida.setDados(barramentoEntrada[6].getDados());
-        else if(sinal1 == true && sinal2 == true && sinal3 == true)
-            barramentoSaida.setDados(barramentoEntrada[7].getDados());
-        
-        
+        int valor = (barramentoSinais.getSinais() & maskSinal) >> deslocamento;
+        barramentoSaida.setDados(barramentoEntrada[valor].getDados());    
     }
     
     public TDados getDado(){

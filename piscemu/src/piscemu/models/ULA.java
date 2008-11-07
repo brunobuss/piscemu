@@ -17,22 +17,38 @@ public class ULA implements ClockListener{
     private BarramentoDados barramentoEntradaA;
     private BarramentoDados barramentoEntradaB;
     private BarramentoSinais barramentoSinais;
-    private int maskSinais;
+    private BarramentoFlags barramentoFlags;
+    private int maskSinal;
+    private int deslocamento;
     
     public ULA(BarramentoDados barramentoSaida, 
                BarramentoDados barramentoEntradaA,
                BarramentoDados barramentoEntradaB,
-               BarramentoSinais barramentoSinais, int maskSinais){
+               BarramentoSinais barramentoSinais, int maskSinal,
+               BarramentoFlags barramentoFlags){
         
         this.barramentoEntradaA = barramentoEntradaA;
         this.barramentoEntradaB = barramentoEntradaB;
         this.barramentoSaida = barramentoSaida;
         this.barramentoSinais = barramentoSinais;
-        this.maskSinais = maskSinais;
+        this.maskSinal = maskSinal;
+        this.barramentoFlags = barramentoFlags;
+        calculaDeslocamento();
     }
     
-    public void setSinal(boolean[] sinais){
-        short num = transformaSinais(sinais);
+    private void calculaDeslocamento(){
+        int temp = maskSinal;
+        int i;
+        for(i = 0; i < 32; i++){
+            if(temp%2 == 1)
+                break;
+            temp = temp >> 1;
+        }
+        deslocamento = i;
+    }
+    
+    public void clock(){
+        int num = (barramentoSinais.getSinais() & maskSinal) >> deslocamento;
         switch(num){
             case 0:
                 barramentoSaida.setDados(barramentoEntradaA.getDados().soma(barramentoEntradaB.getDados()));
@@ -87,28 +103,6 @@ public class ULA implements ClockListener{
                 // 1<<a
                 break;
         }
-        
-    }
-    
-    private short transformaSinais(boolean[] sinais){
-        short ret = 0;
-        boolean t;
-        for(short i = 0; i < QTDSinais/2; i++){
-            t = sinais[i];
-            sinais[i] = sinais[QTDSinais-i-1];
-            sinais[QTDSinais-i-1] = t;
-        }
-        
-        for(short i = 0; i < QTDSinais; i++){
-            if(sinais[i]){
-                ret += Math.pow(2,i);
-            }
-        }
-        
-        return ret;
-    }
-
-    public void clock() {
         
     }
     

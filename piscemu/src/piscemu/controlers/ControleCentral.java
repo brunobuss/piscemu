@@ -14,11 +14,13 @@ import piscemu.models.UC;
 import piscemu.models.ULA;
 import piscemu.models.ControladorMemoria;
 import piscemu.models.Sinais;
+import piscemu.models.BarramentoFlags;
 /**
  *
  * @author thiago
  */
 public class ControleCentral{
+        BarramentoFlags flags;
         BarramentoSinais barrSin;
         BarramentoDados barrULA;
         BarramentoDados barrR0;
@@ -53,6 +55,7 @@ public class ControleCentral{
         ControladorMemoria memoria;
 
     public ControleCentral() {
+        flags = new BarramentoFlags();
         barrULA = new BarramentoDados();
         barrR0 = new BarramentoDados();
         barrR1 = new BarramentoDados();
@@ -81,8 +84,8 @@ public class ControleCentral{
         mux = new Mux2_1(barrMEM, barrULA, barrMUX, Sinais.SINAL_MUX, barrSin);
         muxA = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXA, Sinais.SINAL_MUXA, barrSin);
         muxB = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXB, Sinais.SINAL_MUXB, barrSin);
-        uc = new UC(barrIR, barrSin);
-        ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA);
+        uc = new UC(barrIR, barrSin, flags);
+        ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA, flags);
         memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
         
         uc.addListenerT1(rd);
