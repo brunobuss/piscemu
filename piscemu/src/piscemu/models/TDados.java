@@ -8,7 +8,7 @@ public class TDados {
     private short dado;
     
     public TDados(int dado){
-        this.dado = (short)dado;
+        this.dado = (short)(dado & 0xFFFF);
     }
     
     public TDados(TDados dado){
@@ -18,6 +18,10 @@ public class TDados {
     public short getValor(){
         return dado;
     }
+    
+    public int getValorAbs(){
+        return (int)(dado & 0xFFFF);
+    }    
     
     public void setDado(int dado){
         this.dado = (short)dado;

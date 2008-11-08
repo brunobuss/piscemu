@@ -7,7 +7,7 @@ package piscemu.models;
 
 public class ControladorMemoria implements ClockListener{
 
-    private final int tamMemoria = 64 * 1024; //64K posicoes
+    private final int tamMemoria = 64 * 1024; //64K posicoes, 0xFFFF + 1;
     
     private BarramentoDados barramentoEntradaEndereco;
     private BarramentoDados barramentoSaidaDados;
@@ -73,12 +73,12 @@ public class ControladorMemoria implements ClockListener{
         TDados dado;
         
         if(sinalEscritaLeitura == false){ //Leitura           
-            dado = new TDados(memoria[barramentoEntradaEndereco.getDados().getValor()]);
+            dado = new TDados(memoria[barramentoEntradaEndereco.getDados().getValorAbs()]);
             barramentoSaidaDados.setDados(dado);
         }
         else{ //Escrita
             dado = new TDados(barramentoEntradaDados.getDados());
-            memoria[barramentoEntradaEndereco.getDados().getValor()].setDado(dado);
+            memoria[barramentoEntradaEndereco.getDados().getValorAbs()].setDado(dado);
         }
     }
 }
