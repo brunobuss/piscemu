@@ -5,24 +5,24 @@ package piscemu.models;
  */
 public class BarramentoDados {
 
-    private TDados dados;
+    private TDado dados;
     
-    public BarramentoDados(TDados dados){
-        dados = new TDados(dados);
+    public BarramentoDados(TDado dados){
+        dados = new TDado(dados);
     }
     
     public BarramentoDados(){
-        dados = new TDados((short)0);
+        dados = new TDado((short)0);
     }
-    public void setDados(TDados dados){
-        this.dados.setDado(dados);
+    public void setDados(TDado dados){
+        this.dados.setValor(dados);
     }
     
     public void setDados(BarramentoDados dados){
-        this.dados.setDado(dados.getDados());
+        this.dados.setValor(dados.getDados());
     }
     
-    public TDados getDados(){
+    public TDado getDados(){
         return this.dados;
     }
 }

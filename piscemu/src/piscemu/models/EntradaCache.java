@@ -9,16 +9,16 @@ public class EntradaCache {
 
     private final int tamBloco = 4;
     
-    private TDados[] blocoMemoria;
+    private TDado[] blocoMemoria;
     private boolean bitValidade;
     
     private short rotulo;
     
     public EntradaCache(){
-        blocoMemoria = new TDados[tamBloco];
+        blocoMemoria = new TDado[tamBloco];
         
         for(int i = 0; i < tamBloco; i++){
-            blocoMemoria[i] = new TDados(0);
+            blocoMemoria[i] = new TDado(0);
         }
         bitValidade = false;
     }
@@ -31,7 +31,7 @@ public class EntradaCache {
         bitValidade = false;
     }
     
-    public void setBloco(TDados[] bloco, short rotulo){
+    public void setBloco(TDado[] bloco, short rotulo){
         //TODO: Adicionar tratamento de exceção.
         for(short i = 0; i < tamBloco; i++){
             setDado(bloco[i], rotulo, i);
@@ -40,16 +40,16 @@ public class EntradaCache {
         bitValidade = true;
     }
 
-     public void setDado(TDados dado, short rotulo, short pos){
+     public void setDado(TDado dado, short rotulo, short pos){
         //TODO: Adicionar tratamento de exceção.
-        blocoMemoria[pos].setDado(dado);
+        blocoMemoria[pos].setValor(dado);
     }
     
-    public TDados getDado(short palavra){
+    public TDado getDado(short palavra){
         
         //TODO: Alterar para exception
         if(palavra < 0 || palavra >= tamBloco){
-            return new TDados(0);
+            return new TDado(0);
         }
         
         return blocoMemoria[palavra];

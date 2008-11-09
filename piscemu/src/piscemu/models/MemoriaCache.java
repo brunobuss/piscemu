@@ -30,7 +30,7 @@ public class MemoriaCache {
         return aLinhas[linha].estaNoCache((short)rotulo);
     }
     
-    public TDados getDado(int posMem){
+    public TDado getDado(int posMem){
         int linha, rotulo, palavra;
          
         
@@ -41,7 +41,7 @@ public class MemoriaCache {
         
         if(aLinhas[linha].estaNoCache((short)rotulo) == false){
             //TODO: Add Exception
-            return new TDados(0);
+            return new TDado(0);
         }
         
         return aLinhas[linha].getDado((short)rotulo, (short)palavra);
@@ -56,7 +56,7 @@ public class MemoriaCache {
         aLinhas[linha].invalidaCachePorRotulo((short) rotulo);
     }
     
-    public void setBloco(TDados[] bloco, int posMem){
+    public void setBloco(TDado[] bloco, int posMem){
         
         int linha, rotulo;
          
@@ -74,7 +74,7 @@ public class MemoriaCache {
         
     }
     
-    public void setDado(TDados dado, int posMem){
+    public void setDado(TDado dado, int posMem){
         
         int linha, rotulo, palavra;
          
@@ -91,9 +91,9 @@ public class MemoriaCache {
         aLinhas[linha].setDado(dado, (short)rotulo, (short)palavra);
     }    
 
-    public TDados[] liberaPosCache(int posMem){
+    public TDado[] liberaPosCache(int posMem){
         int linha, rotulo;
-        TDados[] bloco;
+        TDado[] bloco;
         
         linha = (posMem & PISCBitMasks.BMASK_END_INDICE) >> 2;
         rotulo = (posMem & PISCBitMasks.BMASK_END_ROTULO) >> 8;

@@ -48,7 +48,7 @@ public class Mux8_1 implements ClockListener{
         barramentoSaida.setDados(barramentoEntrada[valor].getDados());    
     }    
 
-    public TDados getDado(){
+    public TDado getDado(){
         return barramentoSaida.getDados();
     }
 

@@ -15,7 +15,7 @@ public class ControladorMemoria implements ClockListener{
     private BarramentoSinais barramentoSinais;
     private int maskSinais;
     private boolean sinalEscritaLeitura;
-    private TDados[] memoria;
+    private TDado[] memoria;
     
     private MemoriaCache memCache;
     private int cacheHit = 0;
@@ -33,18 +33,18 @@ public class ControladorMemoria implements ClockListener{
         this.maskSinais = maskSinais;
         
         
-        memoria = new TDados[tamMemoria];
+        memoria = new TDado[tamMemoria];
         
         //Cria todas as instancias de TDados do vetor de memória.
         for(int i = 0; i < tamMemoria; i++){
-            memoria[i].setDado(0);
+            memoria[i].setValor(0);
         }
         
         memCache = new MemoriaCache();
     }
     
     
-    public void carregaMemoria(TDados[] dados, short count, int memPos){
+    public void carregaMemoria(TDado[] dados, short count, int memPos){
 
         if(dados.length < count){
             return; //TODO: Adicionar exception.
@@ -55,12 +55,12 @@ public class ControladorMemoria implements ClockListener{
                 memPos = memPos % tamMemoria;
             }
             
-            memoria[memPos] = new TDados(dados[i]);
+            memoria[memPos] = new TDado(dados[i]);
         }
         
     }
     
-    public TDados getDado(){
+    public TDado getDado(){
         return barramentoSaidaDados.getDados();
     }
 
@@ -76,7 +76,7 @@ public class ControladorMemoria implements ClockListener{
     //0 == leitura, 1 == escrita
     public void masterSync() {
             
-        TDados dado;
+        TDado dado;
         int posMem = barramentoEntradaEndereco.getDados().getValorAbs();
         
         if(sinalEscritaLeitura == false){ //Leitura        
@@ -89,31 +89,31 @@ public class ControladorMemoria implements ClockListener{
                     memCache.setBloco(montaBloco(posMem), posMem);
                 }
                 else{
-                    TDados[] bloco = memCache.liberaPosCache(posMem);
+                    TDado[] bloco = memCache.liberaPosCache(posMem);
                     rebateParaMemoria(bloco, memCache.getUltimaPosLiberada());
                     memCache.setBloco(montaBloco(posMem), posMem);
                 }
                 cacheMiss++;
             }
             
-            dado = new TDados(memCache.getDado(posMem));
+            dado = new TDado(memCache.getDado(posMem));
             barramentoSaidaDados.setDados(dado);
         }
         else{ //Escrita
-            dado = new TDados(barramentoEntradaDados.getDados());
+            dado = new TDado(barramentoEntradaDados.getDados());
             
             if(memCache.estaNoCache(posMem)){
                 memCache.setDado(dado, posMem);
             }            
             else{
-                memoria[posMem].setDado(dado);
+                memoria[posMem].setValor(dado);
             }
         }
     }
     
-    private TDados[] montaBloco(int posMem){
+    private TDado[] montaBloco(int posMem){
         int base;
-        TDados[] bloco = new TDados[4];
+        TDado[] bloco = new TDado[4];
         
         base = (posMem & PISCBitMasks.BMASK_END_INDICE) | (posMem & PISCBitMasks.BMASK_END_ROTULO);
         
@@ -125,7 +125,7 @@ public class ControladorMemoria implements ClockListener{
         return bloco;
     }
     
-    private void rebateParaMemoria(TDados[] bloco, int posBaseMem){
+    private void rebateParaMemoria(TDado[] bloco, int posBaseMem){
         for(int i = 0; i < 4; i++){
             memoria[posBaseMem + i] = bloco[i];
         }        

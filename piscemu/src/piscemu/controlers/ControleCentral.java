@@ -4,7 +4,7 @@
  */
 
 package piscemu.controlers;
-import piscemu.models.TDados;
+import piscemu.models.TDado;
 import piscemu.models.BarramentoDados;
 import piscemu.models.BarramentoSinais;
 import piscemu.models.Registrador;
@@ -108,63 +108,63 @@ public class ControleCentral{
         uc.addListenerMS(memoria);
     }
     
-    public TDados getR0(){
+    public TDado getR0(){
         return r0.getDado();
     }
     
-    public TDados getR1(){
+    public TDado getR1(){
         return r1.getDado();
     }
     
-    public TDados getR2(){
+    public TDado getR2(){
         return r2.getDado();
     }
     
-    public TDados getR3(){
+    public TDado getR3(){
         return r3.getDado();
     }
     
-    public TDados getR4(){
+    public TDado getR4(){
         return r4.getDado();
     }
     
-    public TDados getRX(){
+    public TDado getRX(){
         return rx.getDado();
     }
     
-    public TDados getPC(){
+    public TDado getPC(){
         return pc.getDado();
     }
     
-    public TDados getRD(){
+    public TDado getRD(){
         return rd.getDado();
     }
     
-    public TDados getRE(){
+    public TDado getRE(){
         return re.getDado();
     }
     
-    public TDados getIR(){
+    public TDado getIR(){
         return ir.getDado();
     }
     
-    public TDados getMUX(){
+    public TDado getMUX(){
         return mux.getDado();
     }
     
-    public TDados getMUXA(){
+    public TDado getMUXA(){
         return muxA.getDado();
     }
     
-    public TDados getMUXB(){
+    public TDado getMUXB(){
         return muxB.getDado();
     }
     
-    public TDados getULA(){
+    public TDado getULA(){
         return ula.getDado();
     }
     
-    public TDados getMEM(){
+    public TDado getMEM(){
         return memoria.getDado();
     }
 }

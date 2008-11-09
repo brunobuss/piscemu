@@ -22,7 +22,7 @@ public class Mux2_1 implements ClockListener{
         this.barramentoSinais = barramentoSinais;
     }
     
-    public TDados getDado(){
+    public TDado getDado(){
         return barramentoSaida.getDados();
     }
 

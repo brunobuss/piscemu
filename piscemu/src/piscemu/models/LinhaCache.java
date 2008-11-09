@@ -43,33 +43,33 @@ public class LinhaCache {
         }
     }     
     
-    public TDados getDado(short rotulo, short palavra){
+    public TDado getDado(short rotulo, short palavra){
         
         int iPos = posNoCache(rotulo);
         
         if(iPos != -1){
-                return new TDados(entradas[iPos].getDado(palavra));
+                return new TDado(entradas[iPos].getDado(palavra));
         }
         
-        return new TDados(0);
+        return new TDado(0);
     }
     
-    public TDados[] retornaBlocoPorEntrada(short entrada){
+    public TDado[] retornaBlocoPorEntrada(short entrada){
         
-        TDados[] bloco = new TDados[4];
+        TDado[] bloco = new TDado[4];
         
         for(short i = 0; i < 4; i++){
-            bloco[i] = new TDados(entradas[entrada].getDado(i));
+            bloco[i] = new TDado(entradas[entrada].getDado(i));
         }
         
         return bloco;
     }    
     
-    public void setBloco(TDados[] bloco, short rotulo){       
+    public void setBloco(TDado[] bloco, short rotulo){       
         entradas[posNoCache(rotulo)].setBloco(bloco, rotulo);
     }
 
-    public void setDado(TDados dado, short rotulo, short palavra){       
+    public void setDado(TDado dado, short rotulo, short palavra){       
         entradas[posNoCache(rotulo)].setDado(dado, rotulo, palavra);
     }    
     

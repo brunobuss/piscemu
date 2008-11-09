@@ -95,18 +95,18 @@ public class ULA implements ClockListener{
                 // b<<a
                 break;
             case 11:
-                barramentoSaida.setDados(barramentoEntradaA.getDados().shiftR(new TDados(1)));
+                barramentoSaida.setDados(barramentoEntradaA.getDados().shiftR(new TDado(1)));
                 // 1>>a
                 break;
             case 12:
-                barramentoSaida.setDados(barramentoEntradaA.getDados().shiftL(new TDados(1)));
+                barramentoSaida.setDados(barramentoEntradaA.getDados().shiftL(new TDado(1)));
                 // 1<<a
                 break;
         }
         
     }
     
-    public TDados getDado(){
+    public TDado getDado(){
         return barramentoSaida.getDados();
     }
 

@@ -24,7 +24,7 @@ public class Registrador implements ClockListener{
         }
     }
     
-    public TDados getDado(){
+    public TDado getDado(){
         return barramentoSaida.getDados();
     }
 
