@@ -17,6 +17,10 @@ public class ControladorMemoria implements ClockListener{
     private boolean sinalEscritaLeitura;
     private TDados[] memoria;
     
+    private MemoriaCache memCache;
+    private int cacheHit = 0;
+    private int cacheMiss = 0;
+    
     public ControladorMemoria(BarramentoDados barramentoEntradaEndereco,
                                 BarramentoDados barramentoSaidaDados,
                                 BarramentoDados barramentoEntradaDados,
@@ -35,6 +39,8 @@ public class ControladorMemoria implements ClockListener{
         for(int i = 0; i < tamMemoria; i++){
             memoria[i].setDado(0);
         }
+        
+        memCache = new MemoriaCache();
     }
     
     
@@ -71,14 +77,57 @@ public class ControladorMemoria implements ClockListener{
     public void masterSync() {
             
         TDados dado;
+        int posMem = barramentoEntradaEndereco.getDados().getValorAbs();
         
-        if(sinalEscritaLeitura == false){ //Leitura           
-            dado = new TDados(memoria[barramentoEntradaEndereco.getDados().getValorAbs()]);
+        if(sinalEscritaLeitura == false){ //Leitura        
+            
+            if(memCache.estaNoCache(posMem)){
+                cacheHit++;
+            }
+            else{
+                if(memCache.temPosLivre(posMem)){
+                    memCache.setBloco(montaBloco(posMem), posMem);
+                }
+                else{
+                    TDados[] bloco = memCache.liberaPosCache(posMem);
+                    rebateParaMemoria(bloco, memCache.getUltimaPosLiberada());
+                    memCache.setBloco(montaBloco(posMem), posMem);
+                }
+                cacheMiss++;
+            }
+            
+            dado = new TDados(memCache.getDado(posMem));
             barramentoSaidaDados.setDados(dado);
         }
         else{ //Escrita
             dado = new TDados(barramentoEntradaDados.getDados());
-            memoria[barramentoEntradaEndereco.getDados().getValorAbs()].setDado(dado);
+            
+            if(memCache.estaNoCache(posMem)){
+                memCache.setDado(dado, posMem);
+            }            
+            else{
+                memoria[posMem].setDado(dado);
+            }
         }
+    }
+    
+    private TDados[] montaBloco(int posMem){
+        int base;
+        TDados[] bloco = new TDados[4];
+        
+        base = (posMem & PISCBitMasks.BMASK_END_INDICE) | (posMem & PISCBitMasks.BMASK_END_ROTULO);
+        
+        
+        for(int i = 0; i < 4; i++){
+            bloco[i] = memoria[base + i];
+        }
+        
+        return bloco;
+    }
+    
+    private void rebateParaMemoria(TDados[] bloco, int posBaseMem){
+        for(int i = 0; i < 4; i++){
+            memoria[posBaseMem + i] = bloco[i];
+        }        
     }
 }
