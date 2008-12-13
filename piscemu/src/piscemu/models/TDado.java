@@ -31,49 +31,71 @@ public class TDado {
         this.valor = dado.getValor();
     }
     
-    public TDado soma(TDado dado){
-        return new TDado((short)(this.valor+dado.getValor()));
+    public TDado soma(TDado dado, BarramentoFlags flags){
+        short ret = (short)(this.valor + dado.getValor());
+        // Verificar o Carry
+        
+        if(ret < 0)
+            flags.setNegativo(true);
+        else if(ret == 0)
+            flags.setZero(true);
+               
+        return new TDado(ret);
     }
     
-    public TDado subtrai(TDado dado){
-        return new TDado((short)(dado.getValor() - this.valor));
+    public TDado subtrai(TDado dado, BarramentoFlags flags){
+        
+        short ret = (short)(dado.getValor() - this.valor);
+        
+        // Verificar Carry
+        
+        if(ret < 0)
+            flags.setNegativo(true);
+        else if(ret == 0)
+            flags.setZero(true);
+        
+        return new TDado(ret);
     }
     
-    public TDado compara(TDado dado){
-        if(this.valor > dado.getValor())
+    public TDado compara(TDado dado, BarramentoFlags flags){
+        if(this.valor < dado.getValor()){
+            flags.setMaior(true);
             return new TDado(1);
-        else if(this.valor < dado.getValor())
+        }else if(this.valor > dado.getValor()){
+            flags.setMenor(true);
             return new TDado(-1);
-        else
+        }else{
+            flags.setIgual(true);
             return new TDado(0);
+        }
     }
     
-    public TDado and(TDado dado){
+    public TDado and(TDado dado, BarramentoFlags flags){
         return new TDado((short)(this.valor & dado.getValor()));
     }
     
-    public TDado or(TDado dado){
+    public TDado or(TDado dado, BarramentoFlags flags){
         return new TDado((short)(this.valor | dado.getValor()));
     }
     
-    public TDado not(){
+    public TDado not(BarramentoFlags flags){
         // fazer
         return new TDado(~this.valor);
     }
     
-    public TDado zero(){
+    public TDado zero(BarramentoFlags flags){
         return new TDado(0);
     }
     
-    public TDado negacao(){
+    public TDado negacao(BarramentoFlags flags){
         return new TDado((short)(-this.valor));
     }
     
-    public TDado shiftR(TDado dado){
+    public TDado shiftR(TDado dado, BarramentoFlags flags){
         return new TDado(this.valor>>dado.getValor());
     }
     
-    public TDado shiftL(TDado dado){
+    public TDado shiftL(TDado dado, BarramentoFlags flags){
         return new TDado(this.valor<<dado.getValor());
     }    
 }

@@ -10,7 +10,7 @@ package piscemu.models;
  * @author thiago
  */
 public class Sinais {
-    public static final int QTDSINAIS = 22;
+    public static final int QTDSINAIS = 23;
     public static final int SINAL_A = 1;
     public static final int SINAL_B = SINAL_A*2;
     public static final int SINAL_C = SINAL_B*2;
@@ -33,22 +33,22 @@ public class Sinais {
     public static final int SINAL_U = SINAL_T*2;
     public static final int SINAL_V = SINAL_U*2;
     public static final int SINAL_X = SINAL_V*2;
-//    public static final int SINAL_Z = SINAL_X*2;
+    public static final int SINAL_Z = SINAL_X*2;
     
-    public static final int SINAL_R0 = 0;
-    public static final int SINAL_R1 = 0;
-    public static final int SINAL_R2 = 0;
-    public static final int SINAL_R3 = 0;
-    public static final int SINAL_R4 = 0;
-    public static final int SINAL_RX = 0;
-    public static final int SINAL_PC = 0;
-    public static final int SINAL_RD = 0;
-    public static final int SINAL_RE = 0;
-    public static final int SINAL_IR = 0;
-    public static final int SINAL_MUX = 0;
-    public static final int SINAL_MUXA = 0;
-    public static final int SINAL_MUXB = 0;
-    public static final int SINAL_ULA = 0;
-    public static final int SINAL_MEM = 0;
+    public static final int SINAL_R0 = SINAL_A;
+    public static final int SINAL_R1 = SINAL_B;
+    public static final int SINAL_R2 = SINAL_C;
+    public static final int SINAL_R3 = SINAL_D;
+    public static final int SINAL_R4 = SINAL_E;
+    public static final int SINAL_RX = SINAL_F;
+    public static final int SINAL_PC = SINAL_G;
+    public static final int SINAL_RD = SINAL_H;
+    public static final int SINAL_RE = SINAL_I;
+    public static final int SINAL_IR = SINAL_J;
+    public static final int SINAL_MUX = SINAL_L & SINAL_M;
+    public static final int SINAL_MUXA = SINAL_N & SINAL_O & SINAL_P;
+    public static final int SINAL_MUXB = SINAL_S & SINAL_R & SINAL_S;
+    public static final int SINAL_ULA = SINAL_T & SINAL_U & SINAL_V & SINAL_X;
+    public static final int SINAL_MEM = SINAL_Z;
 
 }
