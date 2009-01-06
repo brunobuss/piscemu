@@ -32,6 +32,7 @@ public class TDado {
     }
     
     public TDado soma(TDado dado, BarramentoFlags flags){
+        /*
         short ret = (short)(this.valor + dado.getValor());
         
         if((this.getValor() > 0 && dado.getValor() > 0 && ret < 0) || (this.getValor() < 0 && dado.getValor() < 0 && ret > 0))
@@ -42,18 +43,26 @@ public class TDado {
         atualizaFlags(ret, flags);        
                
         return new TDado(ret);
+        */
+        
+        return subtrai(new TDado(-dado.getValor()), flags);
+        
     }
     
     public TDado subtrai(TDado dado, BarramentoFlags flags){
         
         short ret = (short)(dado.getValor() - this.valor);
-        
+               
         if((this.getValor() > 0 && dado.getValor() < 0 && ret < 0) || (this.getValor() < 0 && dado.getValor() > 0 && ret < 0))
             flags.setTransbordamento(true);
         else
             flags.setTransbordamento(false);
-        // Verificar Carry
         
+        if((char)dado.getValor() < (char)this.valor)
+            flags.setVaium(true);
+        else
+            flags.setVaium(false);
+               
         atualizaFlags(ret, flags);
         
         return new TDado(ret);
@@ -66,7 +75,11 @@ public class TDado {
             flags.setTransbordamento(true);
         else
             flags.setTransbordamento(false);
-        // verificar Carry
+        
+        if((char)dado.getValor() < (char)this.valor)
+            flags.setVaium(true);
+        else
+            flags.setVaium(false);
         
         atualizaFlags(ret, flags);
         

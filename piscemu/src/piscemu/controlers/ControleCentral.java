@@ -104,6 +104,7 @@ public class ControleCentral{
         uc.addListenerT3(r4);
         uc.addListenerT3(rx);
         uc.addListenerT3(pc);
+        uc.addListenerT3(memoria);
 
         uc.addListenerMS(memoria);
     }
