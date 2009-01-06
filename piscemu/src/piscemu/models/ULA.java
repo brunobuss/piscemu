@@ -57,8 +57,16 @@ public class ULA implements ClockListener{
                 // b-a
                 break;
             case 2:
-                // Verificar as Flags
                 barramentoSaida.setDados(barramentoEntradaA.getDados());
+                if(barramentoEntradaA.getDados().getValor() < 0)
+                        barramentoFlags.setSinal(true);
+                else
+                        barramentoFlags.setSinal(false);
+                
+                if(barramentoEntradaA.getDados().getValor() == 0)
+                        barramentoFlags.setZero(true);
+                else
+                        barramentoFlags.setZero(false);
                 // a
                 break;
             case 3:

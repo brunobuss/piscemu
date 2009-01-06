@@ -143,11 +143,11 @@ public class TDado {
         short ret = (short)(this.valor<<1);
         int vai = 0;
         
-        if(this.valor > 0)
+        if(this.valor < 0)
             vai = 1;
         
         for(int i = 1; i < dado.getValor(); i++){
-            if(ret > 0)
+            if(ret < 0)
                 vai = 1;
             ret = (short)(ret<<1);
         }
@@ -167,7 +167,7 @@ public class TDado {
     }
     
     private void atualizaFlags(short resultado, BarramentoFlags flags){
-        if(resultado > 0)
+        if(resultado < 0)
             flags.setSinal(true);
         else
             flags.setSinal(false);
