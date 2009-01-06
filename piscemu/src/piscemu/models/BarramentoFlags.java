@@ -11,14 +11,12 @@ package piscemu.models;
  */
 
 public class BarramentoFlags {
-    private final int QTDFLAGS = 6;
+    private final int QTDFLAGS = 4;
     
-    private final int ZERO = 0;
-    private final int NEGATIVO = 1;
-    private final int IGUAL = 2;
-    private final int MENOR = 3;
-    private final int MAIOR = 4;
-    private final int VAIUM = 5;
+    private final int SINAL = 0;
+    private final int ZERO = 1;
+    private final int TRANSBORDAMENTO = 2;
+    private final int VAIUM = 3;
     
     private boolean[] flags;
     
@@ -29,40 +27,14 @@ public class BarramentoFlags {
     
     public void setZero(boolean estado){
         flags[ZERO] = estado;
-        if(estado == true){
-            flags[NEGATIVO] = false;
-        }
     }
     
-    public void setNegativo(boolean estado){
-        flags[NEGATIVO] = estado;
-        if(estado == true){
-            flags[ZERO] = false;
-        }
+    public void setSinal(boolean estado){
+        flags[SINAL] = estado;
     }
     
-    public void setIgual(boolean estado){
-        flags[IGUAL] = estado;
-        if(estado == true){
-            flags[MENOR] = false;
-            flags[MAIOR] = false;
-        }
-    }
-    
-    public void setMenor(boolean estado){
-        flags[MENOR] = estado;
-        if(estado == true){
-            flags[MAIOR] = false;
-            flags[IGUAL] = false;
-        }
-    }
-    
-    public void setMaior(boolean estado){
-        flags[MAIOR] = estado;
-        if(estado == true){
-            flags[MENOR] = false;
-            flags[IGUAL] = false;
-        }
+    public void setTransbordamento(boolean estado){
+        flags[TRANSBORDAMENTO] = estado;
     }
     
     public void setVaium(boolean estado){
@@ -73,20 +45,12 @@ public class BarramentoFlags {
         return flags[ZERO];
     }
     
-    public boolean getNegativo(){
-        return flags[NEGATIVO];
+    public boolean getSinal(){
+        return flags[SINAL];
     }
     
-    public boolean getIgual(){
-        return flags[IGUAL];
-    }
-    
-    public boolean getMenor(){
-        return flags[MENOR];
-    }
-    
-    public boolean getMaior(){
-        return flags[MAIOR];
+    public boolean getTrasbordamento(){
+        return flags[TRANSBORDAMENTO];
     }
     
     public boolean getVaium(){
