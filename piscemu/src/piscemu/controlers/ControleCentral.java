@@ -19,42 +19,53 @@ import piscemu.models.BarramentoFlags;
  *
  * @author thiago
  */
-public class ControleCentral{
-        BarramentoFlags flags;
-        BarramentoSinais barrSin;
-        BarramentoDados barrULA;
-        BarramentoDados barrR0;
-        BarramentoDados barrR1;
-        BarramentoDados barrR2;
-        BarramentoDados barrR3;
-        BarramentoDados barrR4;
-        BarramentoDados barrRX;
-        BarramentoDados barrPC;
-        BarramentoDados barrRD;//RDados
-        BarramentoDados barrRE;//REndereço
-        BarramentoDados barrIR;
-        BarramentoDados barrMUX;
-        BarramentoDados barrMUXA;
-        BarramentoDados barrMUXB;
-        BarramentoDados barrMEM;
-        Registrador r0;
-        Registrador r1;
-        Registrador r2;
-        Registrador r3;
-        Registrador r4;
-        Registrador rx;
-        Registrador pc;
-        Registrador rd;
-        Registrador re;
-        Registrador ir;
-        Mux2_1 mux;
-        Mux8_1 muxA;
-        Mux8_1 muxB;
-        UC uc;
-        ULA ula;
-        ControladorMemoria memoria;
+public class ControleCentral extends Thread{
+    private final static int MODO_DIRETO = 0;
+    private final static int MODO_INTRUCAO = 0;
+    private final static int MODO_MICRO = 0;
+    
+    private int modoExecucao;   
+    private boolean instrucao;
+    private boolean micro;
+    private boolean continua;
+    private BarramentoFlags flags;
+    private BarramentoSinais barrSin;
+    private BarramentoDados barrULA;
+    private BarramentoDados barrR0;
+    private BarramentoDados barrR1;
+    private BarramentoDados barrR2;
+    private BarramentoDados barrR3; 
+    private BarramentoDados barrR4;
+    private BarramentoDados barrRX;
+    private BarramentoDados barrPC;
+    private BarramentoDados barrRD;//RDados
+    private BarramentoDados barrRE;//REndereço
+    private BarramentoDados barrIR;
+    private BarramentoDados barrMUX;
+    private BarramentoDados barrMUXA;
+    private BarramentoDados barrMUXB;
+    private BarramentoDados barrMEM;
+    private Registrador r0;
+    private Registrador r1;
+    private Registrador r2;
+    private Registrador r3;
+    private Registrador r4;
+    private Registrador rx;
+    private Registrador pc;
+    private Registrador rd;
+    private Registrador re;
+    private Registrador ir;
+    private Mux2_1 mux;
+    private Mux8_1 muxA;
+    private Mux8_1 muxB;
+    private UC uc;
+    private ULA ula;
+    private ControladorMemoria memoria;
 
     public ControleCentral() {
+        instrucao = false;
+        micro = false;
+        continua = true;
         flags = new BarramentoFlags();
         barrULA = new BarramentoDados();
         barrR0 = new BarramentoDados();
@@ -82,8 +93,8 @@ public class ControleCentral{
         re = new Registrador(barrULA, barrRE, Sinais.SINAL_RE, barrSin);
         ir = new Registrador(barrULA, barrIR, Sinais.SINAL_IR, barrSin);
         mux = new Mux2_1(barrMEM, barrULA, barrMUX, Sinais.SINAL_MUX, barrSin);
-        muxA = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXA, Sinais.SINAL_MUXA, barrSin);
-        muxB = new Mux8_1(barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrRD, barrMUXB, Sinais.SINAL_MUXB, barrSin);
+        muxA = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXA, Sinais.SINAL_MUXA, barrSin);
+        muxB = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXB, Sinais.SINAL_MUXB, barrSin);
         uc = new UC(barrIR, barrSin, flags);
         ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA, flags);
         memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
@@ -107,6 +118,60 @@ public class ControleCentral{
         uc.addListenerT3(memoria);
 
         uc.addListenerMS(memoria);
+    }
+
+    @Override
+    public void run() {
+        int cod = UC.COD_FIM_INSTRUCAO;
+        
+        while(continua){
+            if(modoExecucao == MODO_INTRUCAO && cod == UC.COD_FIM_INSTRUCAO){
+                while(instrucao == false){
+                    try{
+                        Thread.sleep(100);    
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    
+                }
+            }
+            if(modoExecucao == MODO_MICRO){
+                while(micro == false){
+                    try{
+                        Thread.sleep(100);    
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
+            cod = uc.proximaMicro();
+        }                
+    }
+    
+    public void para(){
+        continua = false;
+    }
+    
+    public void rodaDireto(){
+        modoExecucao = MODO_DIRETO;
+        
+    }
+    
+    public void rodaInstrucao(){
+        modoExecucao = MODO_INTRUCAO;
+    }
+    
+    public void rodaMicro(){
+        modoExecucao = MODO_MICRO;
+    }
+    
+    public void proximaInstrucao(){
+        instrucao = true;
+    }
+    
+    public void proximaMicro(){
+        micro = true;
     }
     
     public TDado getR0(){

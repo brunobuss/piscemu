@@ -12,7 +12,9 @@ import java.util.ArrayList;
  * @author thiago
  */
 public class UC {
-      
+    public final static int COD_FIM_INSTRUCAO = 0;
+    public final static int COD_CONTINUA_INSTRUCAO = 1;
+    
     private ArrayList<ClockListener> t1;
     private ArrayList<ClockListener> t2;
     private ArrayList<ClockListener> t3;
@@ -32,13 +34,33 @@ public class UC {
         ms = new ArrayList<ClockListener>();
     }
     
-    public void setSinaisControle(){
-        barramentoSinais.setsinais(0); //entra o codigo da micro
+    private void setSinaisControle(int sinal){
+        barramentoSinais.setsinais(sinal); //entra o codigo da micro
     }
     
+    public int proximaMicro(){
+        int microinstrucao;
+        //faz o que tiver que fazer para pegar a microinstrucao
+        microinstrucao = 0;
+        setSinaisControle(microinstrucao);
+        
+        eventoT1();
+        eventoT2();
+        eventoT3();
+        if(/*intrucao tiver operacao de memoria*/false)
+            eventoMS();
+        
+        if(/*terminou a instrucao*/false)
+            return COD_FIM_INSTRUCAO;
+        else
+            return COD_CONTINUA_INSTRUCAO;
+    }
+    
+    /* Não entendi o objetivo deste metodo
     public void setFlags(boolean[] flags){
         
     }
+    */ 
     
     public void addListenerT1(ClockListener listener){
         t1.add(listener);
