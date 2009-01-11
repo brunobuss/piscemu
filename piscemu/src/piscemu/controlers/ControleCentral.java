@@ -134,6 +134,7 @@ public class ControleCentral extends Thread{
                     }
                     
                 }
+                instrucao = false;
             }
             if(modoExecucao == MODO_MICRO){
                 while(micro == false){
@@ -143,6 +144,7 @@ public class ControleCentral extends Thread{
                         e.printStackTrace();
                     }
                 }
+                micro = false;
             }
             
             cod = uc.proximaMicro();
@@ -155,15 +157,19 @@ public class ControleCentral extends Thread{
     
     public void rodaDireto(){
         modoExecucao = MODO_DIRETO;
+        instrucao = true;
+        micro = true;
         
     }
     
     public void rodaInstrucao(){
         modoExecucao = MODO_INTRUCAO;
+        micro = true;
     }
     
     public void rodaMicro(){
         modoExecucao = MODO_MICRO;
+        instrucao = true;
     }
     
     public void proximaInstrucao(){

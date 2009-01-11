@@ -45,10 +45,11 @@ public class Sinais {
     public static final int SINAL_RD = SINAL_H;
     public static final int SINAL_RE = SINAL_I;
     public static final int SINAL_IR = SINAL_J;
-    public static final int SINAL_MUX = SINAL_L & SINAL_M;
-    public static final int SINAL_MUXA = SINAL_N & SINAL_O & SINAL_P;
-    public static final int SINAL_MUXB = SINAL_S & SINAL_R & SINAL_S;
-    public static final int SINAL_ULA = SINAL_T & SINAL_U & SINAL_V & SINAL_X;
-    public static final int SINAL_MEM = SINAL_Z;
+    public static final int SINAL_MUX = SINAL_L;
+    public static final int SINAL_MUXA = SINAL_M & SINAL_N & SINAL_O;
+    public static final int SINAL_MUXB = SINAL_P & SINAL_Q & SINAL_R;
+    public static final int SINAL_ULA =  SINAL_S & SINAL_T & SINAL_U & SINAL_V;
+    public static final int SINAL_MEM = SINAL_X;
+    public static final int SINAL_MS = SINAL_Z;
 
 }

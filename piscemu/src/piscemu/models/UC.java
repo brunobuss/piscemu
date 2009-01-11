@@ -22,6 +22,8 @@ public class UC {
     private BarramentoDados barramentoEntrada;
     private BarramentoSinais barramentoSinais;
     private BarramentoFlags barramentoFlags;
+    private MemoriaControle memoriaControle;
+    private int end;
     
     public UC(BarramentoDados barramentoEntrada, BarramentoSinais barramentoSinais,
               BarramentoFlags barramentoFlags){
@@ -32,22 +34,31 @@ public class UC {
         t2 = new ArrayList<ClockListener>();
         t3 = new ArrayList<ClockListener>();
         ms = new ArrayList<ClockListener>();
+        memoriaControle = new MemoriaControle(/*passar um arquivo para load*/);
+        end = -1;
     }
     
     private void setSinaisControle(int sinal){
         barramentoSinais.setsinais(sinal); //entra o codigo da micro
     }
     
+    private int getNovoEndereco(int enderecoAtual){
+        return enderecoAtual+1; // Trocar isso
+    }
+    
     public int proximaMicro(){
         int microinstrucao;
-        //faz o que tiver que fazer para pegar a microinstrucao
-        microinstrucao = 0;
+        
+        end = getNovoEndereco(end);
+        
+        microinstrucao = memoriaControle.getControle(end);
         setSinaisControle(microinstrucao);
         
         eventoT1();
         eventoT2();
         eventoT3();
-        if(/*intrucao tiver operacao de memoria*/false)
+        
+        if((microinstrucao & Sinais.SINAL_MS) == Sinais.SINAL_MS)
             eventoMS();
         
         if(/*terminou a instrucao*/false)
