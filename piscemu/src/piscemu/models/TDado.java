@@ -31,6 +31,14 @@ public class TDado {
         this.valor = dado.getValor();
     }
     
+    public TDado inc(BarramentoFlags flags){
+        return subtrai(new TDado(-1), flags); // Muito Roubado
+    }
+    
+    public TDado dec(BarramentoFlags flags){
+        return subtrai(new TDado(1), flags); // Roubado
+    }
+    
     public TDado soma(TDado dado, BarramentoFlags flags){
         /*
         short ret = (short)(this.valor + dado.getValor());

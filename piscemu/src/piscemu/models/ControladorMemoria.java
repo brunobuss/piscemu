@@ -41,6 +41,10 @@ public class ControladorMemoria implements ClockListener{
         }
         
         memCache = new MemoriaCache();
+        
+        //<para_testar>
+        memoria[0].setValor(53);
+        //</para_testar>
     }
     
     

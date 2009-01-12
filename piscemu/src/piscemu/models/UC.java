@@ -35,7 +35,7 @@ public class UC {
         t3 = new ArrayList<ClockListener>();
         ms = new ArrayList<ClockListener>();
         memoriaControle = new MemoriaControle(/*passar um arquivo para load*/);
-        end = -1;
+        end = 0;
     }
     
     private void setSinaisControle(int sinal){
@@ -43,13 +43,11 @@ public class UC {
     }
     
     private int getNovoEndereco(int enderecoAtual){
-        return enderecoAtual+1; // Trocar isso
+        return memoriaControle.getEndereco(enderecoAtual); // Trocar isso
     }
     
     public int proximaMicro(){
         int microinstrucao;
-        
-        end = getNovoEndereco(end);
         
         microinstrucao = memoriaControle.getControle(end);
         setSinaisControle(microinstrucao);
@@ -61,7 +59,9 @@ public class UC {
         if((microinstrucao & Sinais.SINAL_MS) == Sinais.SINAL_MS)
             eventoMS();
         
-        if(/*terminou a instrucao*/false)
+        end = getNovoEndereco(end);
+        
+        if(end == -1)
             return COD_FIM_INSTRUCAO;
         else
             return COD_CONTINUA_INSTRUCAO;

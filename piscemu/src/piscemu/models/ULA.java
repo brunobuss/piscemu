@@ -109,6 +109,14 @@ public class ULA implements ClockListener{
                 barramentoSaida.setDados(barramentoEntradaA.getDados().shiftL(new TDado(1),barramentoFlags));
                 // 1<<a
                 break;
+            case 13:
+                barramentoSaida.setDados(barramentoEntradaA.getDados().inc(barramentoFlags));
+                //inc
+                break;
+            case 14:
+                barramentoSaida.setDados(barramentoEntradaA.getDados().dec(barramentoFlags));
+                //dec
+                break;
         }
         
     }

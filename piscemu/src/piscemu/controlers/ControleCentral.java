@@ -118,6 +118,9 @@ public class ControleCentral extends Thread{
         uc.addListenerT3(memoria);
 
         uc.addListenerMS(memoria);
+        //<para_testar>
+        //modoExecucao = MODO_MICRO;
+        //</para_testar>
     }
 
     @Override
