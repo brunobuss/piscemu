@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use constant VERSION => "0.1";
+use constant VERSION => "0.2";
 
 #Constantes das instrucoes:
 use constant ADD_INST => 0x0100;
@@ -61,8 +61,8 @@ use constant DESTINO_IM_MEM => 0x0F;
 
 my $line;
 my $mem_pos = 0x0000;
-my %labels;
-my %ltr;
+my %labels = ();
+my %ltr = ();
 my @mem = ();
 my $inst;
 my $offset;
@@ -70,6 +70,8 @@ my $com;
 my $label;
 my $op_a;
 my $op_b;
+
+print "Bem vindo ao P(ISC)arser =]\n";
 
 print "DIGITE 'FIM' para encerrar o input do parser\n";
 
@@ -87,7 +89,7 @@ while($line = <>)
 		$com = $1;
 		chomp $com;
 
-		print "Comentario: $com\n";
+		#print "Comentario: $com\n";
 
 	}
 
@@ -97,7 +99,7 @@ while($line = <>)
 
 		$label = $1;
 		chomp $label;
-		print "Label = $label\n";
+		#print "Label = $label\n";
 
 		$labels{"$label"} = $mem_pos;
 	}
@@ -153,23 +155,82 @@ while($line = <>)
 		#printf ("Instrucao = 0x%.4X\n", $inst);
 	}
 
-	elsif($line =~ /^(NOT|CLR|NEG|SHL|SHR|INC|DEC)\s+(R[0-4]|\(R[0-4]\)|\d+|0x[0-9A-F]+)$/)
+	elsif($line =~ /^(NOT|CLR|NEG|SHL|SHR|INC|DEC)\s+(R[0-4]|\(R[0-4]\))$/)
 	{
-		#Instrucao (logica) de 1 operando
+		#Instrucao (logica) de 1 operando, nesse caso o operando FONTE == DESTINO
+		$op_a = $2;
+
+		if($1 eq "NOT")		{$inst += NOT_INST;}
+		elsif($1 eq "CLR")	{$inst += CLR_INST;}
+		elsif($1 eq "NEG")	{$inst += NEG_INST;}
+		elsif($1 eq "SHL")	{$inst += SHL_INST;}
+		elsif($1 eq "SHR")	{$inst += SHR_INST;}
+		elsif($1 eq "INC" )	{$inst += INC_INST;}
+		elsif($1 eq "DEC")	{$inst += DEC_INST;}
+	
+		if($op_a eq "R0")	{$inst += FONTE_R0_DIR;}
+		elsif($op_a eq "R1")	{$inst += FONTE_R1_DIR;}
+		elsif($op_a eq "R2")	{$inst += FONTE_R2_DIR;}
+		elsif($op_a eq "R3")	{$inst += FONTE_R3_DIR;}
+		elsif($op_a eq "R4")	{$inst += FONTE_R4_DIR;}
+		elsif($op_a eq "(R0)")	{$inst += FONTE_R0_MEM;}
+		elsif($op_a eq "(R1)")	{$inst += FONTE_R1_MEM;}
+		elsif($op_a eq "(R2)")	{$inst += FONTE_R2_MEM;}
+		elsif($op_a eq "(R3)")	{$inst += FONTE_R3_MEM;}
+		elsif($op_a eq "(R4)")	{$inst += FONTE_R4_MEM;}
+
+		$mem[$mem_pos] = $inst;
+		$mem_pos++;
 	}
 
 	elsif($line =~ /^(BR[ZNELGC]|JMP)\s+([A-Z]+)$/)
 	{
 		#Instrucao de desvio
+		$op_a = $2; #LABEL
+		chomp $op_a;
+
+		if($1 eq "BRZ")		{$inst += BRZ_INST;}
+		elsif($1 eq "BRN")	{$inst += BRN_INST;}
+		elsif($1 eq "BRE")	{$inst += BRE_INST;}
+		elsif($1 eq "BRL")	{$inst += BRL_INST;}
+		elsif($1 eq "BRG")	{$inst += BRG_INST;}
+		elsif($1 eq "BRC")	{$inst += BRC_INST;}
+		elsif($1 eq "JMP")	{$inst += JMP_INST;}
+
+		$ltr{$mem_pos + 1} = $op_a;		
+		$mem[$mem_pos] = $inst;
+		$mem_pos += 2;
 	}
 
 }
 
-print "Mem dump:\n";
+
+#Faz a troca dos labels:
+
+print "\n\nLabels:\n";
+
+foreach (sort keys %labels)
+{
+	printf ("%s = 0x%.4X\n", $_, $labels{$_});
+}
+
+print "Fim dos labels.\n";
+
+print "Fazendo a troca dos labels...\n";
+
+foreach (sort keys %ltr)
+{
+	unless(exists $labels{$ltr{$_}}) {die "ERRO: Label '" . $ltr{$_} ."' nao declarado\n";}
+	$mem[$_] = $labels{$ltr{$_}};
+}
+
+print "Fim da troca dos labels.\n";
+
+print "\n\nMem dump:\n";
 
 foreach (@mem)
 {
 	printf ("0x%.4X\n", $_);
 }
 
-print "\n\nFim. Have a nice day ;)\n";
+print "\n\nThat's all folks! ;)\n";
