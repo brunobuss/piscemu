@@ -33,6 +33,7 @@ public class JanelaTeste extends javax.swing.JFrame {
         // Posicionar a janela no centro.
         this.setLocationRelativeTo(null);
         controle.start( );
+        atualizaTela();
         
     }
 
@@ -428,7 +429,21 @@ private void setFuncionando(boolean state) {
     this.itemTodas.setEnabled(state);    
 }
 private void atualizaTela(){
-   
+    ER0.setText(controle.getR0() + "");
+    ER1.setText(controle.getR1() + "");
+    ER2.setText(controle.getR2() + "");
+    ER3.setText(controle.getR3() + "");
+    ER4.setText(controle.getR4() + "");
+    ERd.setText(controle.getRD() + "");
+    EPC.setText(controle.getPC() + "");
+    ERx.setText(controle.getRX() + "");
+    ERend.setText(controle.getRE() + "");
+    ERi.setText(controle.getIR() + "");
+    EMem.setText(controle.getMEM() + "");
+    EMux.setText(controle.getMUX() + "");
+    EMuxA.setText(controle.getMUXA() + "");
+    EMuxB.setText(controle.getMUXB() + "");
+    EUla.setText(controle.getULA() + "");
 }
 
 
