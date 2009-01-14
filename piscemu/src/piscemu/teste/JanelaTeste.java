@@ -34,6 +34,7 @@ public class JanelaTeste extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         controle.start( );
         atualizaTela();
+        setFuncionando(true);
         
     }
 
@@ -71,6 +72,7 @@ public class JanelaTeste extends javax.swing.JFrame {
         ERi = new javax.swing.JTextField();
         EUla = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        BAtuliza = new javax.swing.JButton();
         menuPrincipal = new javax.swing.JMenuBar();
         menuConfigurar = new javax.swing.JMenu();
         itemCarregar = new javax.swing.JMenuItem();
@@ -119,6 +121,13 @@ public class JanelaTeste extends javax.swing.JFrame {
         jLabel14.setText("RI");
 
         jLabel15.setText("ULA");
+
+        BAtuliza.setText("Atualiza Tela");
+        BAtuliza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAtulizaActionPerformed(evt);
+            }
+        });
 
         menuConfigurar.setMnemonic('c');
         menuConfigurar.setText("Configurar");
@@ -295,17 +304,20 @@ public class JanelaTeste extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel14)
-                                                    .addComponent(ERi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(EPC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel14)
+                                                        .addComponent(ERi, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(EPC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(BAtuliza))))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(EUla, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +361,9 @@ public class JanelaTeste extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ERi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ERi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BAtuliza)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +412,7 @@ private void itemReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_itemReiniciarActionPerformed
 
 private void itemMicroinstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMicroinstrucaoActionPerformed
-    System.out.println("Próxima microinstrução...");
+    //System.out.println("Próxima microinstrução...");
     controle.proximaMicro();
     atualizaTela();
     
@@ -422,6 +436,10 @@ private void itemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     this.janelaSobre.setVisible(true);
 }//GEN-LAST:event_itemSobreActionPerformed
 
+private void BAtulizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAtulizaActionPerformed
+    atualizaTela();
+}//GEN-LAST:event_BAtulizaActionPerformed
+
 private void setFuncionando(boolean state) {
     this.itemReiniciar.setEnabled(state);
     this.itemMicroinstrucao.setEnabled(state);
@@ -429,21 +447,21 @@ private void setFuncionando(boolean state) {
     this.itemTodas.setEnabled(state);    
 }
 private void atualizaTela(){
-    ER0.setText(controle.getR0() + "");
-    ER1.setText(controle.getR1() + "");
-    ER2.setText(controle.getR2() + "");
-    ER3.setText(controle.getR3() + "");
-    ER4.setText(controle.getR4() + "");
-    ERd.setText(controle.getRD() + "");
-    EPC.setText(controle.getPC() + "");
-    ERx.setText(controle.getRX() + "");
-    ERend.setText(controle.getRE() + "");
-    ERi.setText(controle.getIR() + "");
-    EMem.setText(controle.getMEM() + "");
-    EMux.setText(controle.getMUX() + "");
-    EMuxA.setText(controle.getMUXA() + "");
-    EMuxB.setText(controle.getMUXB() + "");
-    EUla.setText(controle.getULA() + "");
+    ER0.setText(controle.getR0().getValor() + "");
+    ER1.setText(controle.getR1().getValor() + "");
+    ER2.setText(controle.getR2().getValor() + "");
+    ER3.setText(controle.getR3().getValor() + "");
+    ER4.setText(controle.getR4().getValor() + "");
+    ERd.setText(controle.getRD().getValor() + "");
+    EPC.setText(controle.getPC().getValor() + "");
+    ERx.setText(controle.getRX().getValor() + "");
+    ERend.setText(controle.getRE().getValor() + "");
+    ERi.setText(controle.getIR().getValor() + "");
+    EMem.setText(controle.getMEM().getValor() + "");
+    EMux.setText(controle.getMUX().getValor() + "");
+    EMuxA.setText(controle.getMUXA().getValor() + "");
+    EMuxB.setText(controle.getMUXB().getValor() + "");
+    EUla.setText(controle.getULA().getValor() + "");
 }
 
 
@@ -458,6 +476,7 @@ private void atualizaTela(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BAtuliza;
     private javax.swing.JTextField EMem;
     private javax.swing.JTextField EMux;
     private javax.swing.JTextField EMuxA;

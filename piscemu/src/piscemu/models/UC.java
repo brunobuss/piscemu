@@ -35,7 +35,7 @@ public class UC {
         t3 = new ArrayList<ClockListener>();
         ms = new ArrayList<ClockListener>();
         memoriaControle = new MemoriaControle(/*passar um arquivo para load*/);
-        end = 0;
+        end = 0; // valor real 0
     }
     
     private void setSinaisControle(int sinal){
@@ -48,16 +48,37 @@ public class UC {
     
     public int proximaMicro(){
         int microinstrucao;
-        
+        //<debuger>
+        System.out.println("Endereco de controle da proxima micro: " + end);
+        //</debuger>
         microinstrucao = memoriaControle.getControle(end);
+        //<debuger>
+        System.out.println("Proxima micro: " + Integer.toBinaryString(microinstrucao));
+        //</debuger>
+        
         setSinaisControle(microinstrucao);
         
+        //<debuger>
+        System.out.println("T1");
+        //</debuger>        
         eventoT1();
+        //<debuger>
+        System.out.println("T2");
+        //</debuger>
         eventoT2();
+        //<debuger>
+        System.out.println("T3");
+        //</debuger>
         eventoT3();
         
-        if((microinstrucao & Sinais.SINAL_MS) == Sinais.SINAL_MS)
+        if((microinstrucao & Sinais.SINAL_MS) == Sinais.SINAL_MS){
+            //<debuger>
+            System.out.println("MS");
+            //</debuger>
             eventoMS();
+            
+        }
+            
         
         end = getNovoEndereco(end);
         
@@ -112,7 +133,7 @@ public class UC {
     
     private void eventoMS(){
         for (int i = 0; i < ms.size(); i++) {
-            ms.get(i).clock();
+            ms.get(i).masterSync();
             
         }
     }

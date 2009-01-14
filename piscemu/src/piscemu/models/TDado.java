@@ -6,6 +6,9 @@ package piscemu.models;
 public class TDado {
     
     private short valor;
+    public TDado(){
+        this.valor = 0;
+    }
         
     public TDado(int dado){
         this.valor = (short)(dado & 0xFFFF);

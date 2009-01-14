@@ -72,9 +72,15 @@ public class ControladorMemoria implements ClockListener{
     public void clock() {
            if((barramentoSinais.getSinais() & maskSinais) == maskSinais){
                sinalEscritaLeitura = true;
+               //<debuger>
+               System.out.println("Codigo Escrita");
+               //</debuger>
            }else
            {
                sinalEscritaLeitura = false;
+               //<debuger>
+               System.out.println("Codigo Leitura");
+               //</debuger>
            }
     }
 
@@ -84,7 +90,10 @@ public class ControladorMemoria implements ClockListener{
         TDado dado;
         int posMem = barramentoEntradaEndereco.getDados().getValorAbs();
         
-        if(sinalEscritaLeitura == false){ //Leitura        
+        if(sinalEscritaLeitura == false){ //Leitura 
+            //<debuger>
+            System.out.println("Fazendo Leitura...");
+            //</debuger>
             
             if(memCache.estaNoCache(posMem)){
                 cacheHit++;
@@ -103,8 +112,14 @@ public class ControladorMemoria implements ClockListener{
             
             dado = new TDado(memCache.getDado(posMem));
             barramentoSaidaDados.setDados(dado);
+            //<debuger>
+            System.out.println("Dado Lido: " + dado.getValor());
+            //</debuger>
         }
         else{ //Escrita
+            //<debuger>
+            System.out.println("Fazendo Escrita...");
+            //</debuger>
             dado = new TDado(barramentoEntradaDados.getDados());
             
             if(memCache.estaNoCache(posMem)){

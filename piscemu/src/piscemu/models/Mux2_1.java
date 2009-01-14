@@ -29,8 +29,14 @@ public class Mux2_1 implements ClockListener{
     public void clock() {
         if((barramentoSinais.getSinais() & maskSinal) != maskSinal){
             barramentoSaida.setDados(barramentoEntrada[0].getDados());
+            //<debuger>
+            System.out.println("MUX: " + 0);
+            //</debuger>
         }else{
             barramentoSaida.setDados(barramentoEntrada[1].getDados());
+            //<debuger>
+            System.out.println("MUX: " + 1);
+            //</debuger>
         }
     }
 

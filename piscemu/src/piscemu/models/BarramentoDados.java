@@ -15,11 +15,11 @@ public class BarramentoDados {
         dados = new TDado((short)0);
     }
     public void setDados(TDado dados){
-        this.dados.setValor(dados);
+        this.dados.setValor(dados.getValor());
     }
     
     public void setDados(BarramentoDados dados){
-        this.dados.setValor(dados.getDados());
+        this.dados.setValor(dados.getDados().getValor());
     }
     
     public TDado getDados(){

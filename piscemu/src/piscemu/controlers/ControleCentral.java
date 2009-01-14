@@ -21,8 +21,8 @@ import piscemu.models.BarramentoFlags;
  */
 public class ControleCentral extends Thread{
     private final static int MODO_DIRETO = 0;
-    private final static int MODO_INTRUCAO = 0;
-    private final static int MODO_MICRO = 0;
+    private final static int MODO_INTRUCAO = 1;
+    private final static int MODO_MICRO = 2;
     
     private int modoExecucao;   
     private boolean instrucao;
@@ -82,19 +82,20 @@ public class ControleCentral extends Thread{
         barrMUXA = new BarramentoDados();
         barrMUXB = new BarramentoDados();
         barrMEM = new BarramentoDados();
-        r0 = new Registrador(barrULA, barrR0, Sinais.SINAL_R0, barrSin);
-        r1 = new Registrador(barrULA, barrR1, Sinais.SINAL_R1, barrSin);
-        r2 = new Registrador(barrULA, barrR2, Sinais.SINAL_R2, barrSin);
-        r3 = new Registrador(barrULA, barrR3, Sinais.SINAL_R3, barrSin);
-        r4 = new Registrador(barrULA, barrR4, Sinais.SINAL_R4, barrSin);
-        rx = new Registrador(barrULA, barrRX, Sinais.SINAL_RX, barrSin);
-        pc = new Registrador(barrULA, barrPC, Sinais.SINAL_PC, barrSin);
-        rd = new Registrador(barrMUX, barrRD, Sinais.SINAL_RD, barrSin);
-        re = new Registrador(barrULA, barrRE, Sinais.SINAL_RE, barrSin);
-        ir = new Registrador(barrULA, barrIR, Sinais.SINAL_IR, barrSin);
+        barrSin = new BarramentoSinais();
+        r0 = new Registrador(barrULA, barrR0, Sinais.SINAL_R0, barrSin, "r0");
+        r1 = new Registrador(barrULA, barrR1, Sinais.SINAL_R1, barrSin, "r1");
+        r2 = new Registrador(barrULA, barrR2, Sinais.SINAL_R2, barrSin, "r2");
+        r3 = new Registrador(barrULA, barrR3, Sinais.SINAL_R3, barrSin, "r3");
+        r4 = new Registrador(barrULA, barrR4, Sinais.SINAL_R4, barrSin, "r4");
+        rx = new Registrador(barrULA, barrRX, Sinais.SINAL_RX, barrSin, "rx");
+        pc = new Registrador(barrULA, barrPC, Sinais.SINAL_PC, barrSin, "pc");
+        rd = new Registrador(barrMUX, barrRD, Sinais.SINAL_RD, barrSin, "rd");
+        re = new Registrador(barrULA, barrRE, Sinais.SINAL_RE, barrSin, "re");
+        ir = new Registrador(barrULA, barrIR, Sinais.SINAL_IR, barrSin, "ir");
         mux = new Mux2_1(barrMEM, barrULA, barrMUX, Sinais.SINAL_MUX, barrSin);
-        muxA = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXA, Sinais.SINAL_MUXA, barrSin);
-        muxB = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXB, Sinais.SINAL_MUXB, barrSin);
+        muxA = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXA, Sinais.SINAL_MUXA, barrSin, "MUX_A");
+        muxB = new Mux8_1(barrRD, barrR0, barrR1, barrR2, barrR3, barrR4, barrRX, barrPC, barrMUXB, Sinais.SINAL_MUXB, barrSin, "MUX_B");
         uc = new UC(barrIR, barrSin, flags);
         ula = new ULA(barrULA, barrMUXA, barrMUXB, barrSin, Sinais.SINAL_ULA, flags);
         memoria = new ControladorMemoria(barrRE, barrMEM, barrRD, Sinais.SINAL_MEM, barrSin);
@@ -119,7 +120,8 @@ public class ControleCentral extends Thread{
 
         uc.addListenerMS(memoria);
         //<para_testar>
-        //modoExecucao = MODO_MICRO;
+        modoExecucao = MODO_MICRO;
+        pc.setDado_Debuger(1);
         //</para_testar>
     }
 
@@ -129,6 +131,9 @@ public class ControleCentral extends Thread{
         
         while(continua){
             if(modoExecucao == MODO_INTRUCAO && cod == UC.COD_FIM_INSTRUCAO){
+                //<debuger>
+                System.out.println("Modo Instrucao a instrucao");
+                //</debuger>
                 while(instrucao == false){
                     try{
                         Thread.sleep(100);    
@@ -140,6 +145,9 @@ public class ControleCentral extends Thread{
                 instrucao = false;
             }
             if(modoExecucao == MODO_MICRO){
+                //<debuger>
+                System.out.println("Modo Micro a micro");
+                //</debuger>
                 while(micro == false){
                     try{
                         Thread.sleep(100);    
@@ -149,8 +157,11 @@ public class ControleCentral extends Thread{
                 }
                 micro = false;
             }
-            
+           
             cod = uc.proximaMicro();
+            //<debuger>
+            System.out.println("Micro executada.");
+            //</debuger>
         }                
     }
     
