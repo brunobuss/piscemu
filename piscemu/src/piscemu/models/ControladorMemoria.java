@@ -37,7 +37,8 @@ public class ControladorMemoria implements ClockListener{
         
         //Cria todas as instancias de TDados do vetor de memória.
         for(int i = 0; i < tamMemoria; i++){
-            memoria[i].setValor(0);
+            //memoria[i].setValor(0);
+	    memoria[i] = new TDado(0);
         }
         
         memCache = new MemoriaCache();
