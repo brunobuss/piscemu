@@ -60,7 +60,7 @@ public class ControladorMemoria implements ClockListener{
                 memPos = memPos % tamMemoria;
             }
             
-            memoria[memPos] = new TDado(dados[i]);
+            memoria[memPos].setValor(dados[i]);
         }
         
     }
@@ -96,16 +96,21 @@ public class ControladorMemoria implements ClockListener{
             //</debuger>
             
             if(memCache.estaNoCache(posMem)){
+                //System.out.println(posMem + " ja estava no cache!");
                 cacheHit++;
             }
             else{
+                //System.out.println(posMem + " nao estava no cache!");
+                
                 if(memCache.temPosLivre(posMem)){
                     memCache.setBloco(montaBloco(posMem), posMem);
+                    //System.out.println(posMem + " nao estava no cache - tinha posLivre");
                 }
                 else{
                     TDado[] bloco = memCache.liberaPosCache(posMem);
                     rebateParaMemoria(bloco, memCache.getUltimaPosLiberada());
                     memCache.setBloco(montaBloco(posMem), posMem);
+                    //System.out.println(posMem + " nao estava no cache - nao tinha posLivre");
                 }
                 cacheMiss++;
             }

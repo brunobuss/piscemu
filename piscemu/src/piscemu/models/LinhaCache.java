@@ -66,7 +66,7 @@ public class LinhaCache {
     }    
     
     public void setBloco(TDado[] bloco, short rotulo){       
-        entradas[posNoCache(rotulo)].setBloco(bloco, rotulo);
+        entradas[getPosLivre()].setBloco(bloco, rotulo);
     }
 
     public void setDado(TDado dado, short rotulo, short palavra){       

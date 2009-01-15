@@ -64,7 +64,7 @@ public class MemoriaCache {
         rotulo = (posMem & PISCBitMasks.BMASK_END_ROTULO) >> 8;
         flipflop();
         
-        if(aLinhas[linha].estaNoCache((short)rotulo) == false){
+        if(aLinhas[linha].estaNoCache((short)rotulo) == true){
             //TODO: Add Exception
             return;
         }
