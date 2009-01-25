@@ -20,11 +20,17 @@ import javax.swing.JFileChooser;
 
 public class JanelaPrincipal extends javax.swing.JFrame {
 
+    PainelSimulacao painelSimulação;
+
     public JanelaPrincipal() {
         initComponents();
         this.janelaSobre = new JanelaSobre();
         this.janelaTutorial = new JanelaTutorial();
-        
+        this.painelSimulação = new PainelSimulacao();
+
+        this.getContentPane().add(painelSimulação);
+        this.pack();
+
         // Posicionar a janela no centro.
         this.setLocationRelativeTo(null);
     }

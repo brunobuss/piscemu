@@ -1,6 +1,6 @@
 package piscemu;
 
-import piscemu.teste.JanelaTeste;
+import piscemu.views.JanelaPrincipal;
 
 /*
  * Esta classe deverá somente fazer o "bootstrap" do emulador
@@ -14,7 +14,10 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JanelaTeste janelaPrincipal = new JanelaTeste();
+        //JanelaTeste janelaPrincipal = new JanelaTeste();
+        //janelaPrincipal.setVisible(true);
+
+        JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
         janelaPrincipal.setVisible(true);
               
     }
